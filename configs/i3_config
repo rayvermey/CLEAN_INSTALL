@@ -37,7 +37,7 @@ exec --no-startup-id nm-applet
 ########################################################################
 gaps inner 10
 gaps outer 5
-border_radius 8
+#border_radius 8
 new_float pixel 0
 hide_edge_borders none
 
@@ -55,7 +55,7 @@ bindsym Control+mod1+t	exec telegram-desktop ; workspace $ws7
 bindsym Control+mod1+d	exec discord ; workspace $ws7
 bindsym Control+mod1+m	exec --no-startup-id teams ; workspace $ws8
 bindsym Control+mod1+e	exec --no-startup-id joplin-desktop ; workspace $ws9
-#bindsym Control+mod1+e	exec --no-startup-id tusk ; workspace $ws9
+#bindsym Control+mod1+e	exec --no-startup-id joplin-desktop ; workspace $ws9
 bindsym Control+mod1+b	exec --no-startup-id virtualbox ; workspace $ws11
 bindsym Control+mod1+n	exec --no-startup-id nemo ; workspace $ws13
 bindsym Control+mod1+u	exec --no-startup-id todoist ; workspace $ws10
@@ -73,7 +73,7 @@ assign [class="whatsapp"] $ws6
 assign [class="discord"] $ws7
 assign [class="TelegramDesktop"] $ws7
 assign [class="Teams"] $ws8
-assign [class="Tusk"] $ws9
+assign [class="Joplin-desktop"] $ws9
 assign [class="todoist"] $ws10
 assign [class="Trello"] $ws10
 assign [class="Spotify"] $ws12
@@ -362,8 +362,8 @@ bar {
 
 bar {
         position top
-	output HDMI-1
-	tray_output HDMI-1
+	output eDP-1
+	tray_output eDP-1
         status_command $exec i3blocks 2> /dev/null
         #status_command i3status --config ~/.config/i3status/HDMI-0.conf
  colors {
