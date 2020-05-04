@@ -1,0 +1,22 @@
+killall firefox
+sleep 0.5
+killall chromium
+sleep 0.5
+killall telegram-desktop
+sleep 0.5
+killall Discord
+sleep 0.5
+killall Trello
+sleep 0.5
+killall caprine
+sleep 0.5
+killall todoist
+sleep 0.5
+killall slack
+sleep 0.5
+killall cairo-clock
+sleep 0.5
+killall gotop
+sleep 0.5
+sudo killall iftop
+sleep 0.5
