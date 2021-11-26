@@ -1,1 +1,1 @@
-pacman -S --needed - < LAPTOP_PACMAN_PACKAGES.lst
+pacman -S --needed  < LAPTOP_PACMAN_PACKAGES.lst
