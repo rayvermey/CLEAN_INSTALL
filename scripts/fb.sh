@@ -1,0 +1,2 @@
+xdotool search VivRay | dmenu 
+

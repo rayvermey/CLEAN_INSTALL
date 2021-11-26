@@ -1,0 +1,2 @@
+xdotool search Reddit windowactivate
+

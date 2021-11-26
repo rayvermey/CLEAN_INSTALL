@@ -18,7 +18,7 @@ print "$sun";
 }
 if( $values[0] eq "Mostly Cloudy" || $values[0] eq "Cloudy" || $values[0] eq "Dreary (Overcast)" || $values[0] eq "Fog")
 {
-my $cloud = "";
+my $cloud = "   ";
 binmode(STDOUT, ":utf8");
 print "$cloud";
 }

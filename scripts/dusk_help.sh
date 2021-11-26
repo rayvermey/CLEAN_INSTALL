@@ -1,0 +1,1 @@
+awk -F"//" '$1 == "" { next } /Key(Press|Release)/ { gsub(/ /,"",$1); gsub(/XK_/,"",$1); gsub(/\|/,"+",$1); gsub(/MODKEY/,"Super",$1); split($1,F,","); printf "%-30s%s\n",F[2] "+" F[3],$2; }' /home/ray/git/dusk/config.h|sed -e '1,15d' | zenity --text-info --width=1200 --height=600

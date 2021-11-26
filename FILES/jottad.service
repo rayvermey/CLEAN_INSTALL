@@ -1,0 +1,15 @@
+[Unit]
+Description=Jottacloud cli
+
+[Service]
+Type=simple
+User=jottad
+Group=jottad
+EnvironmentFile=-/etc/default/jottad
+EnvironmentFile=-/etc/sysconfig/jottad
+ExecStart=/usr/bin/jottad 
+Restart=always
+WorkingDirectory=/
+
+[Install]
+WantedBy=multi-user.target
