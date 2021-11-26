@@ -1,1 +1,1 @@
-mysqldump -h vandaae11.eleven.axc.nl -u vandaae11_root -p"qazwsx12" vandaae11_zencart >backup.db.moonminerals_test
+mysqldump -h shrweb10.prolocation.net -u shrweb0007 -p "7=?/+;aH:)\`;" shrweb0007 >backup.db.moonminerals.sql

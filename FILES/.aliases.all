@@ -1,0 +1,132 @@
+alias ohmyzsh="mate ~/.oh-my-zsh"
+#zplug "djui/alias-tips"
+[[ -f ~/.zsh_aliases ]] && source ~/.zsh_aliases
+alias 1='pu'
+alias 2='pu -2'
+alias 3='pu -3'
+alias 4='pu -4'
+alias 5='pu -5'
+alias 6='pu -6'
+alias 7='pu -7'
+alias 8='pu -8'
+alias 9='pu -9'
+alias SS="sudo systemctl"
+alias anterg="tmux new-window -n Nova_Antergos 'ssh Nova_Antergos'"
+alias arch="tmux new-window -n Nova_Arch 'ssh NovaArch'"
+alias arcod="tmux new-window -n Nova_ArcoD 'ssh Nova_Arcod'"
+alias bupskel='cp -Rf /etc/skel ~/.skel-backup-$(date +%Y.%m.%d-%H.%M.%S)'
+alias cb="cp ~/.bashrc-latest ~/.bashrc && source ~/.bashrc && sudo cp /etc/skel/.bashrc-latest /etc/skel/.bashrc"
+alias ccat='highlight -O ansi'
+alias cd..='cd ..'
+alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
+alias d='dirs -v'
+alias df='df -h'
+alias egrep='() { $(whence -p egrep) --color=auto $@ }'
+#alias egrep='egrep --color=auto'
+alias fc='sudo fc-cache -fv'
+alias fgrep='fgrep --color=auto'
+#alias fixpng="find . -type f -name "*.png" -exec convert {} -strip {} \;"
+alias free="free -mt"
+alias grep='() { $(whence -p grep) --color=auto $@ }'
+#alias grep='grep --color=auto'
+alias hw="hwinfo --short"
+alias kc='killall conky'
+alias kubu="tmux new-window -n Nova_Kubuntu 'ssh Nova_Kubuntu'"                                                             
+alias l.="ls -A | egrep '^\.'"      
+alias l='ls' 					
+alias la='ls -a'
+alias lal='ls -al'
+alias ll='ls -la'
+#alias ls='() { $(whence -p gls) -Ctr --file-type --color=auto $@ }'
+alias ls='ls --color=auto'
+alias manjaro="tmux new-window -n Nova_Manjaro 'ssh Nova_Manjaro'"
+alias merge="xrdb -merge ~/.Xresources"
+alias microcode='grep . /sys/devices/system/cpu/vulnerabilities/*'
+#alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
+alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
+alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist"
+alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
+alias p="sudo pacman"
+alias pacman='sudo pacman --color auto'
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'
+alias pdelete="sudo pacman -Rsn"
+alias pksyua="yay -Syu --noconfirm"
+alias ps="ps auxf"
+alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
+alias pu='() { pushd $1 &> /dev/null; dirs -v; }'
+alias r="ranger"
+alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -10000"
+alias rm='rm -v'
+alias skel='cp -rf /etc/skel/* ~'
+alias t='cat ~/.todo'
+alias ta='echo "$@" >> ~/.todo'
+alias trizenskip='trizen -S --skipinteg'
+alias unlock="sudo rm /var/lib/pacman/db.lck"
+alias upall="yay -Syu"
+alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
+alias update='bupskel && sudo pacman -Syyu && bupskel'
+alias userlist="cut -d: -f1 /etc/passwd"
+alias vbm="sudo mount -t vboxsf -o rw,uid=1000,gid=1000 Public /home/$USER/Public"
+alias vi="vim"
+#alias vim='() { $(whence -p nvim) $@ }'
+alias wget="wget -c"
+alias yayskip='yay -S --mflags --skipinteg'
+alias yta-aac="youtube-dl --extract-audio --audio-format aac "
+alias yta-best="youtube-dl --extract-audio --audio-format best "
+alias yta-flac="youtube-dl --extract-audio --audio-format flac "
+alias yta-m4a="youtube-dl --extract-audio --audio-format m4a "
+alias yta-mp3="youtube-dl --extract-audio --audio-format mp3 "
+alias yta-opus="youtube-dl --extract-audio --audio-format opus "
+alias yta-vorbis="youtube-dl --extract-audio --audio-format vorbis "
+alias yta-wav="youtube-dl --extract-audio --audio-format wav "
+alias ytv-best="youtube-dl -f bestvideo+bestaudio "
+#shopt -s expand_aliases # expand aliases
+#shopt -s expand_aliases # expand aliases
+#zplug "plugins/common-aliases",    from:oh-my-zsh
+alias td="tdel.sh"
+alias tu="tupd.sh"
+alias shopt="/usr/bin/shopt"
+alias vib="vim /home/ray/.config/bspwm/bspwmrc"
+alias vii="vim /home/ray/.config/i3/config"
+alias viib="vim /home/ray/.i3blocks.conf"
+alias via="vim /home/ray/.config/bspwm/autostart.sh"
+alias vial="vim /home/ray/.aliases.all"
+alias vip="vim /home/ray/.config/polybar/config"
+alias visx="vim /home/ray/.config/bspwm/sxhkd/sxhkdrc"
+alias viz="vim /home/ray/.zshrc"
+alias vibr="vim /home/ray/.bashrc"
+alias cdb="cd /home/ray/.config/bspwm"
+alias cdp="cd /home/ray/.config/polybar"
+alias cdsx="cd /home/ray/.config/sxhkd"
+alias nmirrorlist="sudo nano /etc/pacman.d/mirrorlist"
+alias nconfgrub="sudo nano /boot/grub/grub.cfg"
+
+#gpg
+#verify signature for isos
+alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
+#receive the key of a developer
+alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
+#
+#Start apps in floating windows on right desktop
+alias l_gotop="bspc rule -a Termite -o desktop='^1' state=floating rectangle=920x1020+0+20 border_width=0 && termite -e gotop &"
+alias l_iftop="bspc rule -a Termite -o  desktop='^1' state=floating rectangle=800x548+930+20 border_width=0 && sudo termite -e \"iftop -i wlp0s20f0u2\" &"
+alias l_cclock="bspc rule -a Cairo-clock -o desktop='^1' state=floating rectangle=300x300+600+400 && cairo-clock -o -t zen -d &"
+alias l_vivaldi="bspc rule -a vivaldi-snapshot -o desktop='^6'"
+alias l_spot="bspc rule -a \"[Ss]potify\" -o  desktop='^9'"
+alias l_telegram="bspc rule -a TelegramDesktop -o desktop='^10' state=floating rectangle=925x1026+11+35 && sleep 1 && telegram-desktop &"
+alias l_whatsapp="bspc rule -a ICE-SSB-whatsapp -o desktop='^11'  state=floating rectangle=944x501+0+25 && sleep 1 && /home/ray/scripts/whatsapp.sh &"
+alias l_reddit="bspc rule -a ICE-SSB-reddit -o desktop='^12'  state=floating rectangle=1041x1031+0+25 && sleep 1 && /home/ray/scripts/reddit.sh &"
+alias l_slack="bspc rule -a Slack -o desktop='^11' state=floating rectangle=928x1029+961+25 && sleep 1 && slack &"
+alias l_caprine="bspc rule -a Caprine -o desktop='^11' state=floating rectangle=935x535+10+533 && sleep 1 && caprine &"
+alias l_tusk="bspc rule -a Tusk -o desktop='^13' state=floating rectangle=1900x1024+25+25 && tusk &"
+alias l_todo="bspc rule -a todoist -o desktop='^14' state=floating rectangle=775x1000+20+25 && sleep 1 && todoist &"
+alias l_trello="bspc rule -a Trello -o desktop='^14' state=floating rectangle=1200x1000+800+25 && sleep 1 && trello &"
+alias l_face="bspc rule -a ICE-SSB-facebook -o desktop='^15' && /home/ray/scripts/facebook.sh &"
+alias l_quora="bspc rule -a ICE-SSB-quora -o desktop='^12'  state=floating rectangle=844x1031+1068+25 && sleep 1 && /home/ray/scripts/quora.sh &"
+alias fp="fontpreview"
+#alias shortwave="flatpak run de.haeckerfelix.ShortwaveShortwave"
+alias big="expac -H M '%m\t%n' | sort -h | nl"
+alias list="pacman -Ql $1"
+alias ovh="ssh vps815559.ovh.net"
+alias i3grid="python3 -m i3grid"

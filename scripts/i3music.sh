@@ -1,7 +1,10 @@
 #!/usr/bin/bash
 
+if $(playerctl -p spotify status)
+then
+
 SPOTIFY_STATUS=$(playerctl -p spotify status)
-if [ $SPOTIFY_STATUS == "Paused" ]
+if [ ${SPOTIFY_STATUS} == "Paused" ]
 then
 	TRACKINFO=""
 else
@@ -17,6 +20,7 @@ else
 	#echo $MTRACKINFO
 fi
 
+fi
 for NCSPOT in $(playerctl -l | grep ncspot)
 do
         NCSPOT_STATUS=$(playerctl -p $NCSPOT status)
@@ -52,4 +56,4 @@ do
 	fi
 done
 
-	echo "<span color='#02fa44'>" " $TRACKINFO </span>" "<span color='#fa0223'>"" $CTRACKINFO </span>" "<span color='#f0ca1a'>"" $MTRACKINFO </span>" "<span color='#FF5733'>"" $CLTRACKINFO </span>" "<span color='#FF5733'>"" $NCTRACKINFO </span>"
+xsetroot -name "  $TRACKINFO  $CTRACKINFO  $MTRACKINFO  $CLTRACKINFO  $NCTRACKINFO "
