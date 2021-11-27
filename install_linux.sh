@@ -1,19 +1,28 @@
+if [ $(lsblk|grep disk|grep vda|sed 's/ .*$//') == vda ]
+then
+	DISK=vda
+else
+	DISK=sda
+fi
+
 echo Freeing System
-umount /dev/sda2
+umount /dev/${DISK}2
 sleep 2
-umount /dev/sda3
+umount /dev/${DISK}3
 sleep 2
 
 echo Setting vi
 ln -s /usr/bin/vim /usr/bin/vi
 
 echo Partitioning disk
-sgdisk --zap-all /dev/sda
+sgdisk --zap-all /dev/$DISK
 sleep 2
-sfdisk --delete /dev/sda
+sfdisk --delete /dev/$DISK
 sleep 2
 
-fdisk /dev/sda <<EOF
+read A
+
+fdisk /dev/$DISK <<EOF
 o
 n
 p
@@ -47,17 +56,17 @@ fdisk -l
 
 
 echo Swap
-mkswap /dev/sda1
-swapon /dev/sda1
+mkswap /dev/${DISK}1
+swapon /dev/${DISK}1
 
 echo Formatting disks
-mkfs.ext4 /dev/sda2
-mkfs.ext4 /dev/sda3
+mkfs.ext4 -F /dev/${DISK}2
+mkfs.ext4 -F /dev/${DISK}3
 
 echo Mounting
-mount /dev/sda2 /mnt
+mount /dev/${DISK}2 /mnt
 mkdir /mnt/home
-mount /dev/sda3 /mnt/home
+mount /dev/${DISK}3 /mnt/home
 cp -ax / /mnt
 cp mkinitcpio.conf /mnt/etc
 cp -vaT /run/archiso/bootmnt/arch/boot/$(uname -m)/vmlinuz-linux /mnt/boot/vmlinuz-linux
@@ -147,7 +156,7 @@ pacman-key --init
 pacman-key --populate archlinux
 mkinitcpio -P
 
-grub-install /dev/sda
+grub-install /dev/$DISK
 grub-mkconfig -o /boot/grub/grub.cfg
 
 yay -S paru --noconfirm
