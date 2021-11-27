@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<FileZilla3 version="3.56.2" platform="*nix">
+	<Settings>
+		<Setting name="Use Pasv mode" type="number">1</Setting>
+		<Setting name="Limit local ports" type="number">0</Setting>
+		<Setting name="Limit ports low" type="number">6000</Setting>
+		<Setting name="Limit ports high" type="number">7000</Setting>
+		<Setting name="External IP mode" type="number">0</Setting>
+		<Setting name="External IP" type="string" />
+		<Setting name="External address resolver" type="string">http://ip.filezilla-project.org/ip.php</Setting>
+		<Setting name="Last resolved IP" type="string" />
+		<Setting name="No external ip on local conn" type="number">1</Setting>
+		<Setting name="Pasv reply fallback mode" type="number">0</Setting>
+		<Setting name="Timeout" type="number">20</Setting>
+		<Setting name="Logging Debug Level" type="number">0</Setting>
+		<Setting name="Logging Raw Listing" type="number">0</Setting>
+		<Setting name="fzsftp executable" type="string" />
+		<Setting name="Allow transfermode fallback" type="number">1</Setting>
+		<Setting name="Reconnect count" type="number">2</Setting>
+		<Setting name="Reconnect delay" type="number">5</Setting>
+		<Setting name="Enable speed limits" type="number">0</Setting>
+		<Setting name="Speedlimit inbound" type="number">100</Setting>
+		<Setting name="Speedlimit outbound" type="number">20</Setting>
+		<Setting name="Speedlimit burst tolerance" type="number">0</Setting>
+		<Setting name="View hidden files" type="number">0</Setting>
+		<Setting name="Preserve timestamps" type="number">0</Setting>
+		<Setting name="Socket recv buffer size (v2)" type="number">4194304</Setting>
+		<Setting name="Socket send buffer size (v2)" type="number">262144</Setting>
+		<Setting name="FTP Keep-alive commands" type="number">0</Setting>
+		<Setting name="FTP Proxy type" type="number">0</Setting>
+		<Setting name="FTP Proxy host" type="string" />
+		<Setting name="FTP Proxy user" type="string" />
+		<Setting name="FTP Proxy password" type="string" />
+		<Setting name="FTP Proxy login sequence" type="string" />
+		<Setting name="SFTP keyfiles" type="string" />
+		<Setting name="Proxy type" type="number">0</Setting>
+		<Setting name="Proxy host" type="string" />
+		<Setting name="Proxy port" type="number">0</Setting>
+		<Setting name="Proxy user" type="string" />
+		<Setting name="Proxy password" type="string" />
+		<Setting name="Logging file" type="string" />
+		<Setting name="Logging filesize limit" type="number">10</Setting>
+		<Setting name="Trusted root certificate" type="string" />
+		<Setting name="Size format" type="number">3</Setting>
+		<Setting name="Size thousands separator" type="number">1</Setting>
+		<Setting name="Size decimal places" type="number">0</Setting>
+		<Setting name="Number of Transfers" type="number">2</Setting>
+		<Setting name="Ascii Binary mode" type="number">0</Setting>
+		<Setting name="Auto Ascii files" type="string">am|asp|bat|c|cfm|cgi|conf|cpp|css|dhtml|diz|h|hpp|htm|html|in|inc|js|jsp|m4|mak|md5|nfo|nsi|pas|patch|php|phtml|pl|po|py|qmail|sh|shtml|sql|svg|tcl|tpl|txt|vbs|xhtml|xml|xrc</Setting>
+		<Setting name="Auto Ascii no extension" type="number">1</Setting>
+		<Setting name="Auto Ascii dotfiles" type="number">1</Setting>
+		<Setting name="Theme" type="string">opencrystal/</Setting>
+		<Setting name="Language Code" type="string" />
+		<Setting name="Last Server Path" type="string">1 0 11 public_html 10 wp-content 11 grand-media 6 module 6 sphere</Setting>
+		<Setting name="Concurrent download limit" type="number">0</Setting>
+		<Setting name="Concurrent upload limit" type="number">0</Setting>
+		<Setting name="Update Check" type="number">1</Setting>
+		<Setting name="Update Check Interval" type="number">7</Setting>
+		<Setting name="Last automatic update check" type="string" />
+		<Setting name="Update Check New Version" type="string" />
+		<Setting name="Update Check Check Beta" type="number">0</Setting>
+		<Setting name="Update Check Download Dir" type="string" />
+		<Setting name="Show debug menu" type="number">0</Setting>
+		<Setting name="File exists action download" type="number">0</Setting>
+		<Setting name="File exists action upload" type="number">0</Setting>
+		<Setting name="Allow ascii resume" type="number">0</Setting>
+		<Setting name="Onetime Dialogs" type="string" />
+		<Setting name="Show Tree Local" type="number">1</Setting>
+		<Setting name="Show Tree Remote" type="number">1</Setting>
+		<Setting name="File Pane Layout" type="number">0</Setting>
+		<Setting name="File Pane Swap" type="number">0</Setting>
+		<Setting name="Last local directory" type="string">/home/ray/</Setting>
+		<Setting name="Filelist directory sort" type="number">0</Setting>
+		<Setting name="Queue successful autoclear" type="number">0</Setting>
+		<Setting name="Queue column widths" type="string">180 60 369 80 60 100</Setting>
+		<Setting name="Local filelist colwidths" type="string">365 80 100 206</Setting>
+		<Setting name="Remote filelist colwidths" type="string">545 75 150 167 129 192</Setting>
+		<Setting name="Window position and size" type="string">1 303 246 900 578 </Setting>
+		<Setting name="Local filelist sortorder" type="string">0 0</Setting>
+		<Setting name="Remote filelist sortorder" type="string">0 3</Setting>
+		<Setting name="Time Format" type="string" />
+		<Setting name="Date Format" type="string" />
+		<Setting name="Show message log" type="number">1</Setting>
+		<Setting name="Show queue" type="number">1</Setting>
+		<Setting name="Default editor" type="string">2/usr/bin/kate</Setting>
+		<Setting name="Always use default editor" type="number">0</Setting>
+		<Setting name="Inherit system associations" type="number">1</Setting>
+		<Setting name="Custom file associations" type="string">php /usr/bin/gedit
+. /usr/bin/kate</Setting>
+		<Setting name="Comparison mode" type="number">1</Setting>
+		<Setting name="Comparison threshold" type="number">1</Setting>
+		<Setting name="Theme icon size" type="string" />
+		<Setting name="Timestamp in message log" type="number">0</Setting>
+		<Setting name="Local filelist shown columns" type="string">1111</Setting>
+		<Setting name="Remote filelist shown columns" type="string">111111</Setting>
+		<Setting name="Local filelist column order" type="string">0,1,2,3</Setting>
+		<Setting name="Remote filelist column order" type="string">0,1,2,3,4,5</Setting>
+		<Setting name="Filelist status bar" type="number">1</Setting>
+		<Setting name="Filter toggle state" type="number">0</Setting>
+		<Setting name="Show quickconnect bar" type="number">1</Setting>
+		<Setting name="Messagelog position" type="number">0</Setting>
+		<Setting name="Last connected site" type="string">0/Anhidema</Setting>
+		<Setting name="File doubleclock action" type="number">0</Setting>
+		<Setting name="Dir doubleclock action" type="number">0</Setting>
+		<Setting name="Minimize to tray" type="number">0</Setting>
+		<Setting name="Search column widths" type="string" />
+		<Setting name="Search column shown" type="string" />
+		<Setting name="Search column order" type="string" />
+		<Setting name="Search window size" type="string">0 442 257 750 500 </Setting>
+		<Setting name="Comparison hide identical" type="number">0</Setting>
+		<Setting name="Search sort order" type="string" />
+		<Setting name="Edit track local" type="number">1</Setting>
+		<Setting name="Prevent idle sleep" type="number">1</Setting>
+		<Setting name="Filteredit window size" type="string" />
+		<Setting name="Enable invalid char filter" type="number">1</Setting>
+		<Setting name="Invalid char replace" type="string">_</Setting>
+		<Setting name="Already connected choice" type="number">1</Setting>
+		<Setting name="Edit status dialog size" type="string" />
+		<Setting name="Display current speed" type="number">0</Setting>
+		<Setting name="Toolbar hidden" type="number">0</Setting>
+		<LastServer>
+			<Host>www.anhidema.com</Host>
+			<Port>21</Port>
+			<Protocol>0</Protocol>
+			<Type>0</Type>
+			<User>manon@anhidema.com</User>
+			<Pass>qazwsx12</Pass>
+			<Logontype>1</Logontype>
+			<TimezoneOffset>0</TimezoneOffset>
+			<PasvMode>MODE_DEFAULT</PasvMode>
+			<MaximumMultipleConnections>0</MaximumMultipleConnections>
+			<EncodingType>Auto</EncodingType>
+			<BypassProxy>0</BypassProxy>
+			<Name>Anhidema</Name>
+		</LastServer>
+		<Setting name="Limit ports offset">0</Setting>
+		<Setting name="Preallocate space">0</Setting>
+		<Setting name="SFTP compression">0</Setting>
+		<Setting name="TCP Keepalive Interval">15</Setting>
+		<Setting name="Cache TTL">600</Setting>
+		<Setting name="Kiosk mode">0</Setting>
+		<Setting name="Cache directory" platform="unix" />
+		<Setting name="Greeting resources" />
+		<Setting name="Filelist name sort">1</Setting>
+		<Setting name="File associations (v2)" platform="unix" />
+		<Setting name="Icon theme">default</Setting>
+		<Setting name="Icon scale">125</Setting>
+		<Setting name="File doubleclick action">0</Setting>
+		<Setting name="Dir doubleclick action">0</Setting>
+		<Setting name="Strip VMS revisions">0</Setting>
+		<Setting name="Startup action">0</Setting>
+		<Setting name="Prompt password save">0</Setting>
+		<Setting name="Persistent Choices">0</Setting>
+		<Setting name="Queue completion action">1</Setting>
+		<Setting name="Queue completion command" />
+		<Setting name="Drag and Drop disabled">0</Setting>
+		<Setting name="Disable update footer">0</Setting>
+		<Setting name="Master password encryptor" />
+		<Setting name="Highest shown overlay id">0</Setting>
+		<Setting name="Sitemanager last selected">0/Moonminerals</Setting>
+		<Setting name="Splitter positions (v2)">152 -316 372916666 100 100 500000000</Setting>
+		<Setting name="Minimum TLS Version">2</Setting>
+		<Setting name="Trust system trust store">0</Setting>
+		<Setting name="Greeting version">3.56.2</Setting>
+		<Setting name="Site Manager position">0 4246 241 1104 589 </Setting>
+		<Setting name="Tab data" sensitive="1">
+			<Tabs>
+				<Tab connected="1" selected="1">
+					<Host>shrweb0007.prolocation.net</Host>
+					<Port>21</Port>
+					<Protocol>0</Protocol>
+					<Type>0</Type>
+					<User>shrweb0007</User>
+					<Pass encoding="base64">bWVpaixvaGp1b1c0cXVpdWthaTM=</Pass>
+					<Logontype>1</Logontype>
+					<PasvMode>MODE_DEFAULT</PasvMode>
+					<EncodingType>Auto</EncodingType>
+					<BypassProxy>0</BypassProxy>
+					<Name>Moonminerals</Name>
+					<Site>0/Moonminerals</Site>
+					<RemotePath>1 0</RemotePath>
+					<LocalPath>/DIV/BKUP_MoonMinerals/</LocalPath>
+				</Tab>
+			</Tabs>
+		</Setting>
+	</Settings>
+</FileZilla3>
