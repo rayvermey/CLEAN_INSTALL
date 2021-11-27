@@ -1,0 +1,391 @@
+#################################################################
+# KEYBOARD BINDINGS FOR ANY TWM
+#################################################################
+
+#################################################################
+# SUPER + FUNCTION KEYS
+#################################################################
+
+#Gimp
+#super + g
+#    gimp
+
+#Ranger
+ruper + r
+	ranger
+
+#aInstantassist
+super + a
+	instantassist
+
+#Meld
+super + F5
+    meld
+
+#Keybindings
+super + F1
+	instanthotkeys
+
+super + Return
+	st
+
+super + v
+	quickmenu
+
+#Vlc
+super + F6
+    vlc --video-on-top
+
+#Virt-Manager
+super + F9
+    virt-manager
+
+#Spotify
+super + F10
+    spotify
+
+#Rofi Fullscreen
+super + F11
+    rofi -show run -fullscreen
+
+#Activate Virtual-Box
+#F7
+	#xdo activate -N "VirtualBox Machine"
+
+#Rofi
+super + F12
+    rofi -show run
+
+#################################################################
+# SUPER + ... KEYS
+#################################################################
+
+super + Ctrl + i 
+	instantpacman
+
+super + shift + i 
+	instantshare
+
+#Atom
+#super + {_,shift +} + e
+#   bspc node {@/,@parent} {--equalize,--balance}
+
+#Oblogout
+ctrl + alt + Delete
+   oblogout
+
+#Xkill
+super + Escape
+    xkill
+
+#File-Manager
+super + n
+	spacefm
+
+#dmenu
+#super + shift + d
+	#rofi -show drun -theme paper-float
+	#dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'
+	#ulauncher
+
+#reload sxhkd:
+super + shift + s
+	pkill -USR1 -x sxhkd
+
+super + Ctrl + q
+	instantshutdown
+
+#################################################################
+# CONTROL + ALT KEYS
+#################################################################
+
+#Slimlock
+##ctrl + alt + l
+    #slimlock
+
+#################################################################
+# ALT + ... KEYS
+#################################################################
+
+#Wallpaper trash
+#alt + t
+    #variety -t
+
+#VARIETY KEYS WITH PYWAL
+#################################################################
+
+#Wallpaper trash
+#alt + shift + t
+    #variety -t && wal -i $(cat $HOME/.config/variety/wallpaper/wallpaper.jpg.txt)&
+
+
+#Scrot
+#Print
+    #scrot 'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'
+
+#screeenshooter
+ctrl + Print
+     xfce4-screenshooter
+
+#################################################################
+#     FUNCTION KEYS
+#################################################################
+
+#XF86AudioLowerVolume
+    #amixer set Master 10%-
+
+#Playerctl works for Pragha, Spotify and others
+#Delete the line for playerctl if you want to use mpc
+#and replace it with the corresponding code
+#mpc works for e.g.ncmpcpp
+#mpc toggle
+#mpc next
+#mpc prev
+#mpc stop
+
+#PLAY
+#XF86AudioPlay
+    #playerctl play-pause
+
+#Next
+#XF86AudioNext
+    #playerctl next
+
+#previous
+#XF86AudioPrev
+    #playerctl previous
+
+#Stop
+#XF86AudioStop
+    #playerctl stop
+
+#Brightness up
+#XF86MonBrightnessUp
+    #xbacklight -inc 10
+
+#Brightness down
+#XF86MonBrightnessDown
+    #xbacklight -dec 10
+
+#########################
+#        POLYBAR        #
+#########################
+
+#Hide polybar
+##super + y
+    #polybar-msg cmd toggle
+
+#################################################################
+#################################################################
+##################   DESKTOP SPECIFIC    ########################
+#################################################################
+#################################################################
+
+#################################################################
+# CTRL + ALT KEYS
+#################################################################
+
+#Compton Toggle
+#ctrl + alt + o
+    #~/.config/bspwm/scripts/compton-toggle.sh
+
+# Increase opacity
+#super + alt + o
+        #transset-df -a --inc 0.05
+
+#RamboxPro
+ctrl + alt + m 
+	ramboxpro
+
+#Joplin
+ctrl + alt + e
+	/home/ray/AppImages/Joplin-2.1.9.AppImage
+
+# Decrease opacity
+ctrl + alt + o
+        transset-df -a --dec 0.05
+
+#################################################################
+# SUPER + KEYS
+#################################################################
+
+#Toggle fullscreen of window
+#super + f
+	#bspc node --state \~fullscreen
+
+# Toggle pseudo tiling of window
+#super + p
+	#bspc node --state \~pseudo_tiled
+
+#kill
+#super + q
+	#bspc node -c
+
+#################################################################
+# SUPER KEYS
+#################################################################
+
+#Focus selected desktop
+#super + Tab
+	#bspc desktop -f '^{1-9,10,11,12,13,14,15,16,17}'
+
+# Increase/decrease window gap on focused desktop
+	#super + {plus,minus}
+	#bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 5 ))
+	#super + bracket{left,right}
+
+# set the window state
+#super + space
+	#bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# Move focus to other monitor
+	#super + BackSpace
+		#bspc monitor -f next
+
+#super + {Left, Right}
+  #id=$(bspc query --nodes --node); bspc node --to-desktop {prev,next}; bspc desktop --focus next; bspc node --focus ${id}
+
+#################################################################
+# SUPER + ALT KEYS
+#################################################################
+
+# Move floating window
+#super + alt + {_,shift + }{Left,Down,Up,Right}
+	#~/.config/bspwm/scripts/move-window {_,edge-}{west,south,north,east}
+
+#################################################################
+# SUPER + CONTROL KEYS
+#################################################################
+
+# Cancel preselection
+#super + ctrl + space
+	#bspc node --presel-dir cancel
+
+#################################################################
+# SUPER + SHIFT KEYS
+#################################################################
+
+
+#Reload bspwm
+#super + shift + r
+	#~/.config/bspwm/bspwmrc
+
+#kill
+#super + shift + q
+	#bspc node -c
+
+#Logout
+#super + shift + x
+	#bspc quit
+
+# Focus/swap windows by direction
+#super + {_,shift + }{h,j,k,l}
+	#bspc node --{focus,swap} {west,south,north,east}
+
+# Flip layout vertically/horizontally
+#super + {_,shift + }a
+	#bspc node @/ --flip {vertical,horizontal}
+
+# Move focused window to other monitor
+#super + shift + Left
+	#bspc node -m next --follow
+
+# Move focused window to other monitor
+#super + shift + Right
+		#bspc node -m next --follow
+
+# Move focused window to other monitor
+#super + shift + Up
+	#bspc node -m next --follow
+
+# Move focused window to other monitor
+#super + shift + Down
+		#bspc node -m next --follow
+
+#################################################################
+# SUPER + CONTROL KEYS
+#################################################################
+
+# Focus/swap windows by direction
+#super + ctrl + {Left,Down,Up,Right}
+	#bspc node --{focus} {west,south,north,east}
+
+# Contract tiled space
+#super + ctrl + {h,j,k,l}
+	#bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
+
+# Focus parent/brother/first/second for preselection
+#super + ctrl + {e,r,t,y}
+	#bspc node --focus @{parent,brother,first,second}
+
+# Preselect the splitting area for next window on leaf/parent
+#super + ctrl + {u,i,o,p}
+	#bspc node --presel-dir \~{west,south,north,east}
+
+# Define splitting ratio for next window on leaf/parent
+#super + ctrl + {_,shift +}{1-9}
+	#bspc node {_,@/} --presel-ratio 0.{1-9}
+
+
+#################################################################
+# ALT KEYS
+#################################################################
+
+#Focus selected desktop
+#alt + Tab
+	#bspc desktop -f '^{1-9,10,11,12}'
+
+	#Focus selected desktop
+#alt + shift + Tab
+	#bspc desktop -f '^{1-9,10,11,12}'
+
+#Rotate desktop
+#alt + space
+	#bspc node @/ --rotate {90,-90}
+
+#################################################################
+# ALT + SHIFT KEYS
+#################################################################
+
+# Expand tiled space
+#alt + shift + {h,j,k,l}
+	#bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
+
+#################################################################
+# CTRL + ALT KEYS
+#################################################################
+
+# Focus next/previous window
+#ctrl + alt + Left
+	#bspc node --focus west
+
+# Focus next/previous window
+#ctrl + alt + Right
+	#bspc node --focus east
+
+# Focus Up window
+#ctrl + alt + Up
+	#bspc node --focus north
+
+# Focus Down window
+#ctrl + alt + Down
+	#bspc node --focus south
+
+# Killall
+#ctrl + alt + k
+	#/home/ray/scripts/killall.sh
+
+#################################################################
+#
+#PROTESILEAS
+# Insert the marked window (or focused if no marks) in the first
+# matching receptacle (or preselection if no receptacles).
+#super + n ; i
+       #/home/ray/scripts/bspwm_smart_presel
+
+#ctrl + alt + =
+	#bspc rule -a \* -o desktop='H' state=floating rectangle=800x400+100+100 && termite  -e nload
+
+#super + s ; {t,d,w,c,s,r,q,o,l,f,v,m}
+		#{telegram-desktop,discord,/opt/whatsapp-nativefier-dark/WhatsApp,caprine,slack,/home/ray/scripts/reddit.sh,/home/ray/scripts/quora.sh,todoist,trello,/home/ray/scripts/facebook.sh,tusk,/home/ray/scripts/magister}
+
