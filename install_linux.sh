@@ -1,11 +1,7 @@
 echo Freeing System
-umount /dev/sda1
+umount /dev/sda2
 sleep 2
 umount /dev/sda3
-sleep 2
-umount /dev/sda3
-sleep 2
-swapoff /dev/sda2
 sleep 2
 
 echo Setting vi
@@ -16,18 +12,6 @@ sgdisk --zap-all /dev/sda
 sleep 2
 sfdisk --delete /dev/sda
 sleep 2
-
-#cat << EOF > disk.layout
-#label: dos
-#label-id: 0x0b42f1b9
-#device: /dev/sda
-#unit: sectors
-#sector-size: 512
-#
-#/dev/sda1 : start=        2048, size=     2G, type=82
-##/dev/sda2 : start=     4196352, size=    45G, type=83,bootable
-#/dev/sda3 : start=    87890625, size=   200G, type=83
-#EOF
 
 fdisk /dev/sda <<EOF
 o
