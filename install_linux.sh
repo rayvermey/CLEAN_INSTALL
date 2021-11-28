@@ -107,9 +107,13 @@ cp /root/ai.sh /mnt
 
 mkdir -p /DATA/cloud/Jotta
 mkdir -p /home/ray/.config
+mkdir -p /home/ray/.config/rclone/
 
-cp -r /FILES/rclone /home/ray/.config/rclone
+cp -r configs_general/rclone.conf /home/ray/.config/rclone
 
+
+mkdir -p /DATA/cloud/Jotta
+chown -R ray:ray /DATA/
 
 mkdir JOTTA
 cd JOTTA
@@ -117,6 +121,10 @@ tar xvf /FILES/jotta-cli-0.8.36055_linux_x86.tar
 cp -r usr/* /usr
 cp -r etc/* /etc
 cd ..
+
+yay -S jotta-cli --needed --noconfirm
+
+sudo chown -R jottad /var/lib/jottad
 
 cp /FILES/jottad.service /etc/systemd/system/
 systemctl enable --now jottad.service
@@ -128,9 +136,6 @@ systemctl enable --now sshd.service
 
 ln -s /usr/bin/vim /usr/bin/vi
 chown -R ray:ray /home/ray
-
-mkdir -p /DATA/cloud/Jotta
-chown -R ray:ray /DATA/
 
 sed -i 's/Storage=volatile/#Storage=auto/' /etc/systemd/journald.conf
 rm /etc/udev/rules.d/81-dhcpcd.rules
