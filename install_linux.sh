@@ -6,10 +6,13 @@ else
 fi
 
 echo Freeing System
-umount /dev/${DISK}2
+umount -R /dev/${DISK}2
 sleep 2
-umount /dev/${DISK}3
+umount -R /dev/${DISK}3
 sleep 2
+umount -R /mnt
+sleep 2
+df
 
 echo Setting vi
 ln -s /usr/bin/vim /usr/bin/vi
@@ -76,6 +79,8 @@ cp b43-firmware-6.30.163.46-1-any.pkg.tar.zst /mnt/root
 cp sudoers /mnt/etc
 
 echo CHROOT
+pacman -Syu
+
 arch-chroot /mnt /bin/bash <<EOF >LOG 2>&1
 echo LOCALE and stuff
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
