@@ -79,7 +79,7 @@ cp b43-firmware-6.30.163.46-1-any.pkg.tar.zst /mnt/root
 cp sudoers /mnt/etc
 
 echo CHROOT
-pacman -Syu
+pacman -Syu --noconfirm
 
 arch-chroot /mnt /bin/bash <<EOF >LOG 2>&1
 echo LOCALE and stuff
@@ -100,15 +100,13 @@ cat <<SU >> /etc/sudoers
 ## Same thing without a password
 ray ALL=(ALL) NOPASSWD: ALL
 SU
+sudo pacman -Syu --noconfirm
+sleep 2
+sudo pacman-key --init 
 
-git clone https://aur.archlinux.org/yay.git
-chmod 777 yay
-cd yay
-su ray -c "makepkg -si --noconfirm"
+pacman -U yay-11.0.2-1-x86_64.pkg.tar.zst --noconfirm
 
-echo Preparing Jotta & Rclone
-
-cp /root/ai.sh /mnt
+echo Preparing Jotta and Rclone
 
 mkdir -p /DATA/cloud/Jotta
 mkdir -p /home/ray/.config
@@ -116,6 +114,7 @@ mkdir -p /home/ray/.config/rclone/
 
 cp -r configs_general/rclone.conf /home/ray/.config/rclone
 
+yay -S jotta-cli --needed --noconfirm
 
 mkdir -p /DATA/cloud/Jotta
 chown -R ray:ray /DATA/
@@ -127,7 +126,6 @@ cp -r usr/* /usr
 cp -r etc/* /etc
 cd ..
 
-yay -S jotta-cli --needed --noconfirm
 
 sudo chown -R jottad /var/lib/jottad
 
