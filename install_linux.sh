@@ -81,6 +81,10 @@ cp sudoers /mnt/etc
 echo CHROOT
 pacman -Syu --noconfirm
 
+
+cp yay-11.0.2-1-x86_64.pkg.tar.zst /mnt
+cp configs_global/rclone.conf /mnt
+
 arch-chroot /mnt /bin/bash <<EOF >LOG 2>&1
 echo LOCALE and stuff
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
@@ -112,7 +116,7 @@ mkdir -p /DATA/cloud/Jotta
 mkdir -p /home/ray/.config
 mkdir -p /home/ray/.config/rclone/
 
-cp -r configs_general/rclone.conf /home/ray/.config/rclone
+cp rclone.conf /home/ray/.config/rclone
 
 yay -S jotta-cli --needed --noconfirm
 
@@ -170,6 +174,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 yay -S paru --noconfirm
 
 yay --noconfirm -S yajl
+yay --noconfirm -S inlib2
 
 git clone https://github.com/bakkeby/dusk
 cd dusk
