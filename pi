@@ -1,0 +1,1 @@
+scp install_linux.sh ray@192.168.178.173:/home/ray/git/CLEAN_INSTALL

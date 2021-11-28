@@ -83,7 +83,7 @@ pacman -Syu --noconfirm
 
 
 cp yay-11.0.2-1-x86_64.pkg.tar.zst /mnt
-cp configs_global/rclone.conf /mnt
+cp rclone.conf /mnt
 
 arch-chroot /mnt /bin/bash <<EOF >LOG 2>&1
 echo LOCALE and stuff
