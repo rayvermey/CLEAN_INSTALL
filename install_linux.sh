@@ -118,15 +118,17 @@ pacman -S rclone --noconfirm
 sleep 2
 
 mkdir -p /DATA/cloud/Jotta
-#mkdir -p /home/ray/.config
-#mkdir -p /home/ray/.config/rclone/
+mkdir -p /home/ray/.config
+mkdir -p /home/ray/.config/rclone/
 
 cp /rclone.conf /home/ray/.config/rclone
 
 yay -S jotta-cli --needed --noconfirm
 
 mkdir -p /DATA/cloud/Jotta
+mkdir -p /MEDIA/Jotta_Photos
 chown -R ray:ray /DATA/
+chown -R ray:ray /MEDIA/
 
 mkdir JOTTA
 cd JOTTA
