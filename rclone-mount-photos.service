@@ -1,0 +1,16 @@
+[Unit]
+Description=rclone Jotta Cloud Drive FUSE mount
+Documentation=http://rclone.org/docs/
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+User=ray
+Group=ray
+ExecStart=/usr/bin/rclone mount Photos: /MEDIA/Jotta_Photos 
+ExecStop=/usr/bin/fusermount -uz /MEDIA/Jotta_Photos
+KillMode=none
+
+[Install]
+WantedBy=multi-user.target
