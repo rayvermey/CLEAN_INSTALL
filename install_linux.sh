@@ -81,9 +81,9 @@ cp sudoers /mnt/etc
 echo CHROOT
 pacman -Syu --noconfirm
 
+cp rclone.conf /mnt
 
 cp yay-11.0.2-1-x86_64.pkg.tar.zst /mnt
-cp rclone.conf /mnt
 
 arch-chroot /mnt /bin/bash <<EOF >LOG 2>&1
 echo LOCALE and stuff
@@ -111,6 +111,8 @@ sudo pacman-key --init
 pacman -U yay-11.0.2-1-x86_64.pkg.tar.zst --noconfirm
 
 echo Preparing Jotta and Rclone
+
+pacman -S rclone --noconfirm
 
 mkdir -p /DATA/cloud/Jotta
 mkdir -p /home/ray/.config
