@@ -127,7 +127,7 @@ cp /rclone.conf /home/ray/.config/rclone
 
 echo installing Jotta-cli
 
-yay -S jotta-cli --noconfirm
+su ray -c 'yay -S jotta-cli --noconfirm'
 sleep 5
 
 mkdir -p /DATA/cloud/Jotta
