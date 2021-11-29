@@ -127,21 +127,22 @@ cp /rclone.conf /home/ray/.config/rclone
 
 echo installing Jotta-cli
 
-yay -S jotta-cli --needed --noconfirm
+yay -S jotta-cli --noconfirm
+sleep 5
 
 mkdir -p /DATA/cloud/Jotta
 mkdir -p /MEDIA/Jotta_Photos
 chown -R ray:ray /DATA/
 chown -R ray:ray /MEDIA/
 
-echo Copying Jotta files
+#echo Copying Jotta files
 
-mkdir JOTTA
-cd JOTTA
-tar xvf /FILES/jotta-cli-0.8.36055_linux_x86.tar
-cp -r usr/* /usr
-cp -r etc/* /etc
-cd ..
+#mkdir JOTTA
+#cd JOTTA
+#tar xvf /FILES/jotta-cli-0.8.36055_linux_x86.tar
+#cp -r usr/* /usr
+#cp -r etc/* /etc
+#cd ..
 
 
 sudo chown -R jottad /var/lib/jottad
