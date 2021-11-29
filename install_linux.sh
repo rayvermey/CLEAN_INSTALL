@@ -23,6 +23,8 @@ sleep 2
 sfdisk --delete /dev/$DISK
 sleep 2
 
+read A
+
 fdisk /dev/$DISK <<EOF
 o
 n
@@ -104,19 +106,24 @@ ray ALL=(ALL) NOPASSWD: ALL
 SU
 sudo pacman -Syu --noconfirm
 sleep 2
-sudo pacman-key --init 
+
+pacman-key --init
+pacman-key --populate archlinux
+sleep 3
 
 pacman -U yay-11.0.2-1-x86_64.pkg.tar.zst --noconfirm
 
 echo Preparing Jotta and Rclone
+pacman -S rclone --noconfirm
+sleep 2
 
 mkdir -p /DATA/cloud/Jotta
-mkdir -p /home/ray/.config
-mkdir -p /home/ray/.config/rclone/
+#mkdir -p /home/ray/.config
+#mkdir -p /home/ray/.config/rclone/
 
 cp rclone.conf /home/ray/.config/rclone
 
-su ray -c 'yay -S jotta-cli --needed --noconfirm'
+yay -S jotta-cli --needed --noconfirm
 
 mkdir -p /DATA/cloud/Jotta
 chown -R ray:ray /DATA/
@@ -162,17 +169,16 @@ rm -r /etc/initcpio
 #ip a
 #iwctl --passphrase=Dunnepoes01! station $WLAN connect Deco
 #sleep 5
-pacman-key --init
-pacman-key --populate archlinux
+
 mkinitcpio -P
 
 grub-install /dev/$DISK
 grub-mkconfig -o /boot/grub/grub.cfg
 
-su ray -c 'yay -S paru --noconfirm'
+yay -S paru --noconfirm
 
-su ray -c 'yay --noconfirm -S yajl'
-su ray -c 'yay --noconfirm -S imlib2'
+yay --noconfirm -S yajl
+yay --noconfirm -S inlib2
 
 git clone https://github.com/bakkeby/dusk
 cd dusk
