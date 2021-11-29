@@ -71,7 +71,8 @@ mount /dev/${DISK}3 /mnt/home
 echo Copying files
 cp -ax / /mnt
 cp mkinitcpio.conf /mnt/etc
-cp -vaT /run/archiso/bootmnt/arch/boot/$(uname -m)/vmlinuz-linux /mnt/boot/vmlinuz-linux genfstab -U /mnt >> /mnt/etc/fstab
+cp -vaT /run/archiso/bootmnt/arch/boot/$(uname -m)/vmlinuz-linux /mnt/boot/vmlinuz-linux
+genfstab -U /mnt >> /mnt/etc/fstab
 
 cp b43-firmware-6.30.163.46-1-any.pkg.tar.zst /mnt/root 
 cp sudoers /mnt/etc
