@@ -68,6 +68,7 @@ echo Mounting
 mount /dev/${DISK}2 /mnt
 mkdir /mnt/home
 mount /dev/${DISK}3 /mnt/home
+echo Copying files
 cp -ax / /mnt
 cp mkinitcpio.conf /mnt/etc
 cp -vaT /run/archiso/bootmnt/arch/boot/$(uname -m)/vmlinuz-linux /mnt/boot/vmlinuz-linux
@@ -76,7 +77,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 cp b43-firmware-6.30.163.46-1-any.pkg.tar.zst /mnt/root 
 cp sudoers /mnt/etc
 
-echo CHROOT
+echo Going CHROOT
 pacman -Syu --noconfirm
 
 
@@ -105,9 +106,12 @@ SU
 sudo pacman -Syu --noconfirm
 sleep 2
 
+echo Pacman Keys
 pacman-key --init
 pacman-key --populate archlinux
 sleep 3
+
+echo Installing yay
 
 pacman -U yay-11.0.2-1-x86_64.pkg.tar.zst --noconfirm
 
@@ -121,12 +125,16 @@ mkdir -p /home/ray/.config/rclone/
 
 cp /rclone.conf /home/ray/.config/rclone
 
+echo installing Jotta-cli
+
 yay -S jotta-cli --needed --noconfirm
 
 mkdir -p /DATA/cloud/Jotta
 mkdir -p /MEDIA/Jotta_Photos
 chown -R ray:ray /DATA/
 chown -R ray:ray /MEDIA/
+
+echo Copying Jotta files
 
 mkdir JOTTA
 cd JOTTA
@@ -143,12 +151,17 @@ systemctl enable --now jottad.service
 
 cp /FILES/rclone-mount.service /etc/systemd/system/
 cp /FILES/rclone-mount-photos.service /etc/systemd/system/
+
+echo Enabling rclone services
+
 systemctl enable --now rclone-mount.service
 systemctl enable --now rclone-mount-photos.service
 
 systemctl enable --now sshd.service
 
 ln -s /usr/bin/vim /usr/bin/vi
+
+echo cleaning up
 
 sed -i 's/Storage=volatile/#Storage=auto/' /etc/systemd/journald.conf
 rm /etc/udev/rules.d/81-dhcpcd.rules
@@ -160,12 +173,20 @@ rm /root/{.automated_script.sh,.zlogin}
 rm /etc/mkinitcpio-archiso.conf
 rm -r /etc/initcpio
 
+echo mkinitcpio
+
 mkinitcpio -P
+
+echo Installing grub
 
 grub-install /dev/$DISK
 grub-mkconfig -o /boot/grub/grub.cfg
 
+echo installing paru
+
 yay -S paru --noconfirm
+
+echo Installing dusk
 
 yay --noconfirm -S yajl
 yay --noconfirm -S imlib2
@@ -177,15 +198,11 @@ sudo make install
 
 EOF
 
+echo moving dusk
 
 cp mirrorlist /mnt/etc/pacman.d/
 cp rclone-mount* /mnt/etc/systemd/system
-mkdir /home/ray/git
-mv /mnt/dusk /home/ray/git
-chown -R ray:ray /home/ray
-cat <<EIND >/home/ray/.xinitrc
-xrandr -s 1920x1080 &
-exec /usr/local/bin/dusk
-EIND
+mkdir /mnt/home/ray/git
+mv /mnt/dusk /mnt/home/ray/git
 
 
