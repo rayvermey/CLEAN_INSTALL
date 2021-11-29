@@ -23,6 +23,8 @@ sleep 2
 sfdisk --delete /dev/$DISK
 sleep 2
 
+read A
+
 fdisk /dev/$DISK <<EOF
 o
 n
@@ -119,7 +121,7 @@ mkdir -p /DATA/cloud/Jotta
 #mkdir -p /home/ray/.config
 #mkdir -p /home/ray/.config/rclone/
 
-cp rclone.conf /home/ray/.config/rclone
+cp /rclone.conf /home/ray/.config/rclone
 
 yay -S jotta-cli --needed --noconfirm
 
