@@ -23,8 +23,6 @@ sleep 2
 sfdisk --delete /dev/$DISK
 sleep 2
 
-read A
-
 fdisk /dev/$DISK <<EOF
 o
 n
