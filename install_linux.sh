@@ -142,12 +142,13 @@ cp /FILES/jottad.service /etc/systemd/system/
 systemctl enable --now jottad.service
 
 cp /FILES/rclone-mount.service /etc/systemd/system/
+cp /FILES/rclone-mount-photos.service /etc/systemd/system/
 systemctl enable --now rclone-mount.service
+systemctl enable --now rclone-mount-photos.service
 
 systemctl enable --now sshd.service
 
 ln -s /usr/bin/vim /usr/bin/vi
-chown -R ray:ray /home/ray
 
 sed -i 's/Storage=volatile/#Storage=auto/' /etc/systemd/journald.conf
 rm /etc/udev/rules.d/81-dhcpcd.rules
@@ -158,17 +159,6 @@ rm /etc/systemd/system/getty@tty1.service.d/autologin.conf
 rm /root/{.automated_script.sh,.zlogin}
 rm /etc/mkinitcpio-archiso.conf
 rm -r /etc/initcpio
-#rmmod b43
-#rmmod wl
-#pacman -U b43-firmware-6.30.163.46-1-any.pkg.tar.zst 
-#sleep 5
-#modprobe wl
-#modprobe b43
-#sleep 5
-#WLAN=$(ip a| grep wlan| cut -d: -f2)
-#ip a
-#iwctl --passphrase=Dunnepoes01! station $WLAN connect Deco
-#sleep 5
 
 mkinitcpio -P
 
@@ -178,7 +168,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 yay -S paru --noconfirm
 
 yay --noconfirm -S yajl
-yay --noconfirm -S inlib2
+yay --noconfirm -S imlib2
 
 git clone https://github.com/bakkeby/dusk
 cd dusk
@@ -190,4 +180,12 @@ EOF
 
 cp mirrorlist /mnt/etc/pacman.d/
 cp rclone-mount* /mnt/etc/systemd/system
+mkdir /home/ray/git
+mv /mnt/dusk /home/ray/git
+chown -R ray:ray /home/ray
+cat <<EIND >/home/ray/.xinitrc
+xrandr -s 1920x1080 &
+exec /usr/local/bin/dusk
+EIND
+
 
