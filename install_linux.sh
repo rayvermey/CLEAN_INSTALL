@@ -189,3 +189,5 @@ EOF
 
 
 cp mirrorlist /mnt/etc/pacman.d/
+cp rclone-mount* /mnt/etc/systemd/system
+
