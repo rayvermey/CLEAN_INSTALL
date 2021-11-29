@@ -23,8 +23,6 @@ sleep 2
 sfdisk --delete /dev/$DISK
 sleep 2
 
-read A
-
 fdisk /dev/$DISK <<EOF
 o
 n
@@ -81,9 +79,9 @@ cp sudoers /mnt/etc
 echo CHROOT
 pacman -Syu --noconfirm
 
-cp rclone.conf /mnt
 
 cp yay-11.0.2-1-x86_64.pkg.tar.zst /mnt
+cp rclone.conf /mnt
 
 arch-chroot /mnt /bin/bash <<EOF >LOG 2>&1
 echo LOCALE and stuff
@@ -112,15 +110,13 @@ pacman -U yay-11.0.2-1-x86_64.pkg.tar.zst --noconfirm
 
 echo Preparing Jotta and Rclone
 
-pacman -S rclone --noconfirm
-
 mkdir -p /DATA/cloud/Jotta
 mkdir -p /home/ray/.config
 mkdir -p /home/ray/.config/rclone/
 
 cp rclone.conf /home/ray/.config/rclone
 
-yay -S jotta-cli --needed --noconfirm
+su ray -c 'yay -S jotta-cli --needed --noconfirm'
 
 mkdir -p /DATA/cloud/Jotta
 chown -R ray:ray /DATA/
@@ -173,10 +169,10 @@ mkinitcpio -P
 grub-install /dev/$DISK
 grub-mkconfig -o /boot/grub/grub.cfg
 
-yay -S paru --noconfirm
+su ray -c 'yay -S paru --noconfirm'
 
-yay --noconfirm -S yajl
-yay --noconfirm -S inlib2
+su ray -c 'yay --noconfirm -S yajl'
+su ray -c 'yay --noconfirm -S imlib2'
 
 git clone https://github.com/bakkeby/dusk
 cd dusk
