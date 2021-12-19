@@ -73,13 +73,15 @@ echo Mounting
 mount /dev/${DISK}3 /mnt
 mkdir /mnt/home
 mount /dev/${DISK}4 /mnt/home
+mkdir /mnt/efi
+mount /dev/${DISK}1 /mnt/efi
 echo Copying files
 cp -ax / /mnt
 cp mkinitcpio.conf /mnt/etc
 cp -vaT /run/archiso/bootmnt/arch/boot/$(uname -m)/vmlinuz-linux /mnt/boot/vmlinuz-linux
+sleep 2
 genfstab -U /mnt >> /mnt/etc/fstab
 
-cp b43-firmware-6.30.163.46-1-any.pkg.tar.zst /mnt/root 
 cp sudoers /mnt/etc
 cp yay-11.0.2-1-x86_64.pkg.tar.zst /mnt
 cp rclone.conf /mnt
@@ -133,6 +135,7 @@ mkdir -p /DATA/cloud/Jotta
 mkdir -p /home/ray/.config
 mkdir -p /home/ray/.config/rclone/
 
+chown -R ray:ray /home/ray
 cp /rclone.conf /home/ray/.config/rclone
 
 echo installing Jotta-cli
@@ -189,8 +192,6 @@ echo mkinitcpio
 mkinitcpio -P
 
 echo Installing grub
-mkdir /efi
-mount /dev/${DISK}1 /efi
 
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
 
@@ -198,7 +199,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 echo installing paru
 
-su ray -c 'yay -S paru --noconfirm'
+su ray -c 'yay -S paru-bin --noconfirm'
 
 echo Installing dusk
 
@@ -211,7 +212,7 @@ make
 sudo make install
 
 pacman -S gimp picom vivaldi sxhkd copyq transmission-gtk bash-completion dunst variety syncthing telegram-desktop caprine discord feh flameshot spice --noconfirm 
-yay -S autokey whatsapp-nativefier kalu insync spacefm slack tweetdeck nomachine spotify-legacy ncspot --noconfirm
+su ray -c 'yay -S autokey whatsapp-nativefier kalu insync spacefm slack tweetdeck nomachine spotify-legacy ncspot --noconfirm'
 
 
 EOF
