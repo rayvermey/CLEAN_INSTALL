@@ -107,6 +107,11 @@ cat <<SU >> /etc/sudoers
 ## Same thing without a password
 ray ALL=(ALL) NOPASSWD: ALL
 SU
+
+echo Chowning Ray
+chown -R ray:ray /home/ray
+sleep 2
+
 echo Pacman Keys
 pacman-key --init 
 sleep 3
