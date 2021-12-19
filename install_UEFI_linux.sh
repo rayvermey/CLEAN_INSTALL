@@ -107,12 +107,14 @@ cat <<SU >> /etc/sudoers
 ## Same thing without a password
 ray ALL=(ALL) NOPASSWD: ALL
 SU
+echo Pacman Keys
+pacman-key --init 
+sleep 3
+pacman-key --populate archlinux
+sleep 3
 sudo pacman -Syu --noconfirm
 sleep 2
 
-echo Pacman Keys
-pacman-key --init && pacman-key --populate archlinux
-sleep 3
 
 echo Installing yay
 
