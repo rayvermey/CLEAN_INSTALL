@@ -1,0 +1,14 @@
+#
+find /srv/http/vandaaag -type f -newer /srv/http/LastVDbackup | xargs tar cvf /srv/http/vandaaag/VD_Modified
+#
+# Haal Moonminerals hier naar toe
+#
+echo Bestanden van Vandaaag ophalen
+sitecopy --synch Vandaaag
+echo Bestanden van html copieren
+echo Database restoren
+mysql -pqazwsx12 moonminerals < backup_modified.sql
+
+#DATE=`date "+%d%m%Y"`
+touch /srv/http/vandaaag/LastVDbackup
+echo Done!

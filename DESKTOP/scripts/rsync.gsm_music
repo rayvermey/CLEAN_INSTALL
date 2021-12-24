@@ -1,0 +1,1 @@
+rsync -r -t -v --progress --delete -s /home/ray/Cloud/Music /media/GSM/external_sd/

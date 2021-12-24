@@ -1,0 +1,22 @@
+Filesystem      Size  Used Avail Use% Mounted on
+dev             7,8G     0  7,8G   0% /dev
+run             7,8G  9,5M  7,8G   1% /run
+/dev/sdc2        98G   22G   71G  24% /
+tmpfs           7,8G  191M  7,7G   3% /dev/shm
+tmpfs           7,8G     0  7,8G   0% /sys/fs/cgroup
+tmpfs           7,8G   39M  7,8G   1% /tmp
+/dev/sdd1       916G  376G  494G  44% /DATA
+/dev/sda1       219G  7,8G  200G   4% /TO_SORT
+/dev/sdc1       511M  272K  511M   1% /boot/efi
+/dev/loop0       55M   55M     0 100% /var/lib/snapd/snap/core18/1668
+/dev/loop5       25M   25M     0 100% /var/lib/snapd/snap/snapd/6434
+/dev/loop1       45M   45M     0 100% /var/lib/snapd/snap/gtk-common-themes/1440
+/dev/loop4       55M   55M     0 100% /var/lib/snapd/snap/core18/1650
+/dev/loop2      161M  161M     0 100% /var/lib/snapd/snap/gnome-3-28-1804/116
+/dev/loop3       25M   25M     0 100% /var/lib/snapd/snap/snapd/6240
+/dev/sdb1       1,8T  1,1T  657G  63% /DATA_STATIC
+/dev/sda7       453G  221G  209G  52% /DATA_CLOUD
+/dev/sdc3       359G  100G  242G  30% /home
+/dev/sda6       688G   43G  611G   7% /ARCHIVE
+tmpfs           1,6G   24K  1,6G   1% /run/user/1000
+pCloud.fs       2,0T  1,8T  223G  90% /home/ray/pCloudDrive

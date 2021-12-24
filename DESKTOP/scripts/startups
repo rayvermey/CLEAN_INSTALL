@@ -1,0 +1,4 @@
+/usr/bin/autokey-gtk & >/dev/null 2>&1
+/usr/bin/kalu & >/dev/null 2>&1
+#/home/ray/scripts/start_en_connect.sh
+

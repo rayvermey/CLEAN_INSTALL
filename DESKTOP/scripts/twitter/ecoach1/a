@@ -1,0 +1,28 @@
+for INTEREST in nlp mindmap vacature banen detachering fieldmanager freeware gezocht directeur selfimprove self-improve succes vennep photo
+do
+/usr/bin/wget -O /data/twitter/ecoach1/twittersearchresult.$INTEREST http://search.twitter.com/search?q=$INTEREST 2>/dev/null
+NAMES=`/bin/cat /data/twitter/ecoach1/twittersearchresult.$INTEREST`
+for value in $NAMES
+do
+    if [[ $value =~ \?status\=@([^\"]*)\" ]]
+    then
+        TUID=`echo $value|cut -d= -f5|sed 's/\"//'`
+        i=1
+        n=${#BASH_REMATCH[*]}
+        while [[ $i -lt $n ]]
+        do
+        if [ `grep $TUID /data/twitter/ecoach1/friends.all.srt` ]
+	then
+          :
+	  let i++
+        else
+        #echo $TUID >>/tmp/twitfollows.$INTEREST
+        echo Following $TUID now
+            # /usr/bin/curl --basic --user ecoach1:12qwaszx --data status="follow $TUID" http://twitter.com/statuses/update.xml
+            let i++
+	fi
+        shift
+        done
+    fi
+done
+done

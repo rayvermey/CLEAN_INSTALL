@@ -1,0 +1,14 @@
+cd /home/ray/git/dusk
+NOW=$(sha256sum config.h | cut -d" " -f1)
+cp config.h backups/config.h.$(date "+%y%m%d") 
+nvim config.h
+THEN=$(sha256sum config.h | cut -d" " -f1)
+if [ $NOW != $THEN ]
+then
+	./build.sh
+else
+	:
+fi
+
+#cd /home/ray/git/dusk && cp config.h backups/config.h.$(date "+%y%m%d") && nvim config.h && ./build.sh"
+#alias vii="cd /home/ray/git/dwm-flexipatch && cp config.h backups/config.h.$(date "+%y%m%d") && nvim config.h && ./build.sh"

@@ -1,0 +1,450 @@
+#!/bin/sh
+exec `which perl` -x. $0 $*
+#!/usr/bin/perl -w
+#
+# dispus,v 2.7 2007/03/30 13:29:21 Exp
+#
+# dispus - Browse a directory tree to find out where all the space went.
+#
+# Written by Annihilannic (annihilannic@hotmail.com)
+#
+#  Todo:
+#
+#	o Parse all automount map files.  Start with auto_master and
+#	  auto.master, add any further maps to the array we're looping
+#	  through as they are found.  No longer needs to be OS senstive
+#	  as we can just search for all and ignore any missing ones.
+#	o Won't work with NIS though; could always process them too...
+#	o http://publib16.boulder.ibm.com/doc_link/en_US/a_doc_lib/cmds/aixcmds1/automount.htm
+#
+#  Bugs:
+#
+#	o If a filesystem is automounted while running it will not be 
+#	  recognised as a separate filesystem, but mounts aren't checked
+#	  regularly for efficacity.
+#	o Does not check secondary automounter configuration files, such
+#	  as those used by a /- entry in the master file.
+#	o If 'mount' is not in the path issues a warning (due to perl
+#	  -w switch) but does not 'die' gracefully.
+#	o Not recognising mount points in MacOS X.
+#	o Shebang line not working in Irix 6.5.20.
+#
+#  Version history:
+#
+# 2.7	o Human readable format option made available (similar to 'df -h'), as
+#	  requested by gatetec on Tek-Tips.  Set $human_readable=1 to use it.
+#	o Switched from SCCS to RCS source control.
+#
+# 2.6	o Much better handling of shell metacharacters in file names.
+#	  Thanks to Shawn Porter for suggestion and testing.
+#	o HP-UX and DEC OSF/1 changes and handling of HP-UX 'bdf' 
+#	  command.  Thanks to Navin Jain for code.
+#
+# 2.5	o Hard coded ignored mount point /tmp_mnt on AIX.
+#	o Changes for MacOS X compatibility.  
+# 	o Fixed bug reading stty output on cygwin/Linux.
+#	o Removed directory reference in 'ls' command to allow it to
+#	  work in a directory containing many files.  Works fine until
+#	  ls output exceeds ~32768 bytes.
+#
+# 2.4	o Changed the prompt to match the new name (Oops).
+#	o Some changes for AIX compatibility.  Thanks to Lloyd Blauen
+#	  for testing.
+#
+# 2.3	o Moved 'commas' code into a subroutine and used it to display
+#	  'df' totals as well.
+#	o Added 'x' option to quit at Ed Schaefer's request.
+#	o Slightly changed 'df' output processing to recognise devices
+#	  that don't begin with '/'.
+#
+# 2.2	o Renamed from 'dusage.pl' to 'dispus', a contraction of DIsk
+#	  SPace USage (and apparently the Romanian work for "ready" or
+#	  "willing") to avoid confusion with a similarly named script by 
+#	  a fellow called John Vromans as well as a similar utility for 
+#	  NetWare.
+#	o Uses #!/bin/sh shebang at beginning of script to accommodate
+#	  varying locations of 'perl'.
+#	o Fixed yet another bug with space handling, this time while 
+#	  viewing the contents of a directory whose name contains spaces.
+#
+# 2.1	o Starting using 'sccs' to manage code.
+#	o Fixed incorrect counting of mount points.  An empty array has
+#	  -1 items, not 0.
+#
+# 1.9	o Fixed handling of filenames with spaces by always using branch
+#	  that handles ignoring mount points.
+#
+# 1.8	o Slight change to 'du' options selection based on OS (for Cygwin).
+#	o Changed to display correct values from 'df'.
+#
+# 1.7	o Hidden files not listed.  Found a way to fix using an `ls` but
+#	  runs into the filenames with spaces bug again.
+#	o Include free space on filesystem after current directory name.
+#
+# 1.6	o Fixed bug with determining mount points under Linux (Solaris
+#	  says "(filesystem) on (device)" unless you use 'mount -v',
+#	  in which case the sense is reversed, like Linux).
+#	o Accommodated different auto master filename on Linux.
+#
+# 1.5	o Reads /etc/auto_master to establish further mount points to
+#	  ignore.
+#
+# 1.4	o Displays 'Ignoring mount points:' if the current directory
+#	  is a mount point, though it may not contain any. - bug fixed.
+#
+# 1.3	o Code improvements (use /string/i in regexp matches).
+#	o Ignore mount points in any directory.
+#
+# 1.2	o Accept 'c' or 'cd' and a parameter.
+#	o Remembered to increment version number.
+#       o "!shell command"
+#
+# 1.1 	o Accept 'quit', 'exit'.
+#	o Changed '.' command to reread usage in current directory in
+#	  case files have been deleted.
+#
+# 1.0 	o Linux compatibility (different du switches).
+#
+# 0.9 	o Ignore mount points in root directory.
+#
+# 0.8 	o Used KB (Bytes) instead of Kb (Kilobits).
+#	o Added -d switch to du to restrict it to that particular 
+#	  filesystem.
+#	o Added 'k' command to start Korn shell instead of Bourne as
+#	  root's SHELL variable always seems to be '/bin/sh' regardless.
+#
+# 0.7 	o Directories containing a space in their name are not handled
+#	  correctly by the split. - fixed.
+#	o Fixed prompt on invalid selection.
+#	o Terminated 'du' command with -- to handle files beginning with
+#	  '-' character.
+#
+# 0.6	o Included help, new prompt, shell function.
+#	o Started version history.
+
+# Initialise a few things.
+
+sub init {
+
+	$version='dispus v2.7';
+
+	# Whether or not to use 'human-readable' mode, i.e. GB, MB, KB.
+	$human_readable=0;
+
+	$S_IFDIR=0x4000;
+	$PROMPT="\ndispus> ";
+
+	# Number of lines used on screen apart from actual file listing.
+	$linesreserved=6; 
+
+	# Set $pagelength by using:
+	#  - the LINES environment variable,
+	#  - 'stty rows' value or 
+	#  - the default value, in that order.
+	$pagelength=$ENV{"LINES"};
+	if (!defined($pagelength)) { 
+		open(STTY,"stty -a |") || die "Error running stty: $!";
+		while (<STTY>) {
+			/rows (= )*([0-9]+)/;
+			if (defined($2)) { $pagelength=$2 };
+		}
+		close(STTY);
+	}
+	if (!defined($pagelength)) { $pagelength=24 };
+
+	# Set OS dependent variables.
+	chomp($os=`uname`);
+	if ($os eq "AIX"){
+		$du="du -ks -- ";
+		# VERIFY
+		$automaster="/etc/auto_master";
+		$mount="mount | ";
+	} elsif ($os eq "HP-UX"){
+		$du="du -xks -- ";
+		$automaster="/etc/auto_master";
+		$mount="mount -v | "
+	} elsif ($os eq "Linux") {
+		$du="du -xks -- ";
+		$automaster="/etc/auto.master";
+		$mount="mount -v | "
+	} elsif ($os eq "OSF1"){
+		$du="du -xks -- ";
+		$automaster="/etc/auto.master";
+		$mount="mount | "
+	} elsif ($os eq "MacOS") {
+		$du="du -ks -- ";
+		$automaster="/etc/auto_master";
+		$mount="mount -v | "
+	} elsif ($os eq "SunOS"){
+		$du="du -dks -- ";
+		$automaster="/etc/auto_master";
+		$mount="mount -v | "
+	} else {
+		$du="du -ks -- ";
+		$automaster="/etc/auto_master";
+		$mount="mount -v | "
+	}
+
+	open(MOUNTPOINTS, $mount) or die "Error running mount: $!";
+	$i=0;
+	if ($os eq "AIX") {
+		# Always ignore the /tmp_mnt filesystem.
+		$mountpoints[$i++]="/tmp_mnt";
+		<MOUNTPOINTS>; # Skip first two lines (column headings)
+		<MOUNTPOINTS>;
+		while (<MOUNTPOINTS>) {
+			# Account for lines with empty node (first) column.
+			if (/^ +[^ ]+ +([^ ]+) /) { $mountpoints[$i++]=$1; }
+			# Account for lines with non-empty node column, 
+			# e.g. NFS mounts.
+			if (/^[^ ]+ +[^ ]+ +([^ ]+) /) { $mountpoints[$i++]=$1; }
+		}
+	} else {
+		while (<MOUNTPOINTS>) {
+			if (/^.*\son\s(\/.*?)?\s.+\n/) { $mountpoints[$i++]=$1; }
+		}
+	}
+	close(MOUNTPOINTS);
+
+	if (open(MOUNTPOINTS, $automaster)) {
+		while (<MOUNTPOINTS>) {
+			if (/^(\/.*?)\s.+$/) { $mountpoints[$i++]=$1; }
+		}
+		close(MOUNTPOINTS);
+	}
+}
+
+# Put commas in number(s) to make them easy to read.
+
+sub commas {
+	return unless defined wantarray;  # void context, do nothing
+	my @parms = @_;
+	for (@parms) { 
+		if ($human_readable) {
+			SWITCH: {
+				if ($_>1024**2) { $units = "GB"; $_ /= 1024**2; last SWITCH; }
+				if ($_>1024)    { $units = "MB"; $_ /= 1024;    last SWITCH; }
+				$units = "KB";
+			}
+			$_ = sprintf("%.2f %s",$_,$units);
+		} else {
+			if ($_ =~ s/(\d+)(\d\d\d)$/$1,$2/ == 1) {
+				until ( ($_ =~ s/(\d+)(\d\d\d),/$1,$2,/) != 1) { };
+			}
+			$_.= " KB"
+		}
+	}
+	return wantarray ? @parms : $parms[0];
+}
+
+# Run du and populate @usage and @dirname.
+
+sub readusage {
+	chomp($cwd=`pwd`);
+	print("$version - Reading usage in ",$cwd,"\n");
+
+	# Determine whether there are any mountpoints in the current
+	# directory.
+	$i=0;
+	@cwdmountpoints=();
+	foreach (@mountpoints) {
+		if ($cwd eq "/" && m@^/([^/]+)$@) {
+			$cwdmountpoints[$i++] = $1;
+		} elsif (m@^$cwd/([^/]+)$@) { 
+			$cwdmountpoints[$i++] = $1;
+		}
+	}
+
+	# Ignore any mountpoints in the current directory.
+	open(LS, "ls -d -- * .[!.]* 2> /dev/null |")
+		or die "Error running ls: $!";
+	chomp(@files=(<LS>));
+	close(LS);
+
+	foreach (@files) {
+		# Escape backslashes, double-quotes, dollar signs and 
+		# backquotes.
+		s/([\\"\$`])/\\$1/g;
+		# Surround filename in quotes if it contains other shell 
+		# metacharacters.
+                s/^(.*[<>|;'()&# ].*)$/\"$1\"/;
+	}
+
+	if ($#cwdmountpoints >= 0) {
+		print "Ignoring mount points:";
+		foreach (@cwdmountpoints) {
+			for ($i=0; $i <= $#files; $i++) {
+				# Remove any mount points.
+				if ($files[$i] eq $_) {
+					splice(@files,$i,1);
+					print " $_"
+				}
+			}
+		}
+		print "\n";
+	}
+
+	$ducmd = $du . join(" ",@files) . " | sort -n -r |";
+
+	open(DUKS, $ducmd) or die "Error running du: $!";
+	@duks=(<DUKS>);
+	close(DUKS);
+	chomp(@duks);
+
+	$i=1;
+	$#usage=0;
+	foreach (@duks) {
+		/([0-9]+)\s+(.*)/;
+		$usage[$i] = $1;
+		$dirname[$i] = $2;
+		$i++;
+	}
+	$topofpage=1;
+}
+
+# Display the contents of @usage and @dirname neatly.
+
+sub displaydusage {
+	$i=$topofpage;
+	printf("\n");
+	if ($topofpage==1) {
+		$templinesreserved=$linesreserved + 2;
+
+		# Display space used on this filesystem.
+		if ($os eq "HP-UX") {
+			# Cater for HP-UX' multiple-line 'bdf' output.
+			open(DF, "/usr/bin/bdf $cwd 2> /dev/null |") or die "Error running /usr/bin/bdf: $!";
+			<DF>; 	# Skip first line (column headings)
+			while (<DF>) {
+				chop($_);
+				s/^ +//;
+				@arr = split(/ +/, $_);
+				if ($#arr == 0) { next ; }
+				if ($#arr == 4) { $used=$arr[1] ; $tot=$arr[0] ; $per=$arr[3]; }
+				else            { $used=$arr[2] ; $tot=$arr[1] ; $per=$arr[4]; }
+				print("   " . commas($used) . " used of " . commas($tot) 
+					. " available ($per)\n\n"); 
+			} 
+		} else {
+			open(DF, "df -k $cwd 2> /dev/null | ") or die "Error running df: $!";
+			while (<DF>) {
+				if (/^.* +([0-9]+) +([0-9]+) +[0-9]+ +([0-9]+%)/) {
+					print("   " . commas($2) . " used of " . commas($1) 
+						. " available ($3)\n\n"); 
+				}
+			}
+		}
+		close(DF);
+
+	} else {
+		$templinesreserved=$linesreserved;
+	}
+	while ($i <= $#usage 
+		&& $i-$topofpage < $pagelength-$templinesreserved) {
+
+		$mode = (stat($dirname[$i]))[2];
+		if ( defined($mode) && ($S_IFDIR & $mode)) {
+			printf("%4d. %13s   %s\n",$i,commas($usage[$i]),$dirname[$i]);
+		} else {
+			printf("      %13s   %s\n",commas($usage[$i]),$dirname[$i]);
+		}
+		$i++;
+	}
+	$i--;   # Undo the overrun.
+	print "\n $topofpage to $i of $#usage shown   ? - help";
+	if ($i != $#usage) { print "   f - forward" };
+	if ($topofpage != 1) { print "   b - back" };
+	print "   q - quit\n";
+}
+
+# Main code.
+
+init;
+if ($#ARGV >= 0) {
+	chdir($ARGV[0]) || die "Unable to change directory to $ARGV[0]: $!";
+}
+readusage;
+displaydusage;
+print $PROMPT;
+WHILE: while (<STDIN>) {
+	chomp;
+	CASE: {
+		/^\?$/ && do { 
+			print "\n";
+			print "?	Display this help\n";
+			print "0-9+	Traverse selected directory\n";
+			print ".	Redisplay current directory\n";
+			print "..	Traverse parent directory\n";
+			print "c [dir]	Change to specific directory\n";
+			print "f	Page forward\n";
+			print "b	Page back\n";
+			print "q	Quit\n";
+			print "s	Start \$SHELL in current directory\n";
+			print "k	Start /bin/ksh in current directory\n";
+			print "![cmd]	Run command 'cmd' (or shell if omitted) in current directory\n";
+			last CASE;
+		};
+		/^[0-9]+$/ && do { 
+			print "\n";
+			chdir($dirname[$_]);
+			readusage;
+			displaydusage;
+			last CASE;
+		};
+		/^\.$/ && do { 
+			readusage;
+			displaydusage;
+			last CASE;
+		};
+		/^\.\.$/ && do { 
+			chdir("..");
+			readusage;
+			displaydusage;
+			last CASE;
+		};
+		/^cd?( (.+))?$/i && do { 
+			if (defined($2)) {
+				$newdir=$2;
+			} else {
+				print "Enter directory to change to: ";
+				chomp($newdir=<STDIN>);
+			}
+			if (chdir($newdir)) {
+				readusage; 
+				displaydusage;
+			} else {
+				print "chdir to $newdir failed!\n";
+			}
+			last CASE;
+		};
+		/^b$/i && do { 
+			$topofpage=$topofpage-($pagelength-$linesreserved);
+			if ($topofpage < 1) { $topofpage=1 }
+			displaydusage;
+			last CASE; 
+		};
+		/^f$/i && do { 
+			$topofpage=$i;
+			displaydusage;
+			last CASE; 
+		};
+		/^k$/i && do { 
+			system "/bin/ksh";
+			displaydusage;
+			last CASE; 
+		};
+		/^[s!](.+)?$/i && do { 
+			if (defined($1)) {
+				system($1);
+			} else {
+				system "\$SHELL";
+				displaydusage;
+			}
+			last CASE;
+		};
+		/^(q.*|exit|x)$/i && do { last WHILE; };
+		print "Invalid selection!  ? for help.\n";
+	}
+	print $PROMPT;
+}
+print "\n";

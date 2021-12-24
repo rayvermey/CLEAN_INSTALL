@@ -1,0 +1,11 @@
+address_book
+address_format
+counter
+counter_history
+Alles Customers
+email_archive
+ideal_directory
+ideal_transactions
+Alles Orders
+Alles Paypal
+

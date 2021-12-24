@@ -1,0 +1,1 @@
+rsync -a -h --progress --stats -r -tgo -p -l -D --update --delete --iconv=ISO-8859-1,utf-8 /data/media/Muziek/ /data/NAS/BACKUP/MUZIEK | mail -s"Rsync Muziek" ray@moonyar.nl
