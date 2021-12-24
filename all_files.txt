@@ -1,0 +1,27 @@
+total 4808
+-rw-r--r-- 1 ray  ray        0 Dec 24 01:46 all_files.txt
+-rw-r--r-- 1 ray  ray   255767 Nov 26 14:30 b43-firmware-6.30.163.46-1-any.pkg.tar.zst
+-rw-r--r-- 1 ray  ray  1596823 Nov 26 14:30 broadcom-wl-5.10.56.27.3_mipsel.tar.bz2
+-rw-r--r-- 1 ray  ray       72 Nov 26 14:30 broadcom-wl.conf
+drwxr-xr-x 2 ray  ray     4096 Nov 28 15:03 configs_general
+drwxr-xr-x 3 ray  ray     4096 Nov 27 12:13 DESKTOP
+drwxr-xr-x 5 ray  ray     4096 Nov 26 14:26 dusk
+drwxr-xr-x 2 ray  ray     4096 Nov 27 18:01 FILES
+-rwxr-xr-x 1 ray  ray       71 Nov 28 16:09 gg
+-rw-r--r-- 1 ray  ray     4012 Dec 19 15:19 install_linux.sh
+-rw-r--r-- 1 ray  ray     4273 Dec 19 17:01 install_UEFI_linux.sh
+drwxr-xr-x 2 ray  ray     4096 Nov 27 12:12 LAPTOP
+-rw-r--r-- 1 ray  ray     2246 Nov 27 17:48 mirrorlist
+-rw-r--r-- 1 ray  ray     2510 Nov 27 17:46 mkinitcpio.conf
+-rw-r--r-- 1 ray  ray     3493 Nov 26 14:31 NEWINSTALL.sh
+-rwxr-xr-x 1 ray  ray       69 Nov 28 20:56 pi
+-rw------- 1 ray  ray     4309 Nov 29 15:45 rclone.conf
+-rw-r--r-- 1 ray  ray      357 Nov 29 15:59 rclone-mount-photos.service
+-rw-r--r-- 1 ray  ray      352 Nov 29 15:59 rclone-mount.service
+-rw-r--r-- 1 ray  ray      163 Nov 26 14:25 README.md
+drwxr-xr-x 3 ray  ray    12288 Dec 19 23:51 scripts
+-rw-r--r-- 1 ray  ray      478 Nov 27 18:42 setup_system.sh
+-r--r--r-- 1 root root    3189 Nov 27 17:45 sudoers
+-rwxr-xr-x 1 ray  ray       39 Nov 27 17:51 u
+drwxr-xr-x 2 ray  ray     4096 Nov 27 12:13 VM
+-rw-r--r-- 1 ray  ray  2961166 Nov 28 16:49 yay-11.0.2-1-x86_64.pkg.tar.zst
