@@ -197,7 +197,15 @@ make
 sudo make install
 
 pacman -S gimp picom vivaldi sxhkd copyq transmission-gtk bash-completion dunst variety syncthing telegram-desktop caprine discord feh flameshot spice --noconfirm 
-yay -S autokey whatsapp-nativefier kalu insync spacefm slack tweetdeck nomachine spotify-legacy ncspot --noconfirm
+#yay -S autokey whatsapp-nativefier kalu insync spacefm slack tweetdeck nomachine spotify-legacy ncspot --noconfirm
+
+##################################################################################################
+##################################################################################################
+##################################################################################################
+### Hieronder de scripts copieren en van Jotta met pacman -U file loop de packages nog installeren
+##################################################################################################
+##################################################################################################
+##################################################################################################
 
 
 EOF
