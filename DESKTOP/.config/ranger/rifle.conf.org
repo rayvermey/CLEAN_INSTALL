@@ -1,1 +1,0 @@
-ext jpg|png,     X, flag f = $(echo -en "gimp\n feh\n inkscape"  | rofi -dmenu -p "Open with:" -lines 3) -- "$@"

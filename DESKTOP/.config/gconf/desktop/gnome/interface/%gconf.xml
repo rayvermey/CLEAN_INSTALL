@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<gconf>
-	<entry name="gtk_color_scheme" mtime="1608772389" type="string">
-		<stringvalue>selected_bg_color:#398ee7;selected_fg_color:#eeeeee;</stringvalue>
-	</entry>
-</gconf>
