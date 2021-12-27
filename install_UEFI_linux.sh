@@ -211,7 +211,7 @@ cd dusk
 make
 sudo make install
 
-pacman -S gimp picom vivaldi sxhkd copyq transmission-gtk bash-completion dunst variety syncthing telegram-desktop caprine discord feh flameshot spice --noconfirm 
+#pacman -S gimp picom vivaldi sxhkd copyq transmission-gtk bash-completion dunst variety syncthing telegram-desktop caprine discord feh flameshot spice --noconfirm 
 #su ray -c 'yay -S autokey whatsapp-nativefier kalu insync spacefm slack tweetdeck nomachine spotify-legacy ncspot --noconfirm'
 
 
