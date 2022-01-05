@@ -1,11 +1,13 @@
-if [ $(lsblk|grep disk|grep vda|sed 's/ .*$//') == vda ]
-then
-	DISK=vda
-else
+#if [ $(lsblk|grep disk|grep vda|sed 's/ .*$//') == vda ]
+#then
+	#DISK=vda
+#else
 	DISK=sda
-fi
+#fi
 
 echo Freeing System
+umount -R /dev/${DISK}1
+sleep 2
 umount -R /dev/${DISK}2
 sleep 2
 umount -R /dev/${DISK}3
@@ -29,27 +31,31 @@ fdisk /dev/$DISK <<EOF
 o
 n
 p
-+${MEMTOTAL}k
+
+
++2G
+t
+82
+n
+p
+
+
++45G
 t
 
-19
+83
 n
 
 
-+30G
-t
-
-20
-n
-
 
 
 t
 
-28
+83
+a
+2
 w
 EOF
-
 fdisk -l
 
 echo Swap
@@ -64,6 +70,7 @@ echo Mounting
 mount /dev/${DISK}2 /mnt
 mkdir /mnt/home
 mount /dev/${DISK}3 /mnt/home
+
 echo Copying files
 cp -ax / /mnt
 cp mkinitcpio.conf /mnt/etc
