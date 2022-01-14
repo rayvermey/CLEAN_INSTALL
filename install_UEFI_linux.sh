@@ -85,10 +85,10 @@ cp sudoers /mnt/etc
 cp yay-11.0.2-1-x86_64.pkg.tar.zst /mnt
 cp rclone.conf /mnt
 
-cp xinitrc /mnt/home
+cp /FILES/xinitrc /mnt/home
 
 echo Going CHROOT
-arch-chroot /mnt /bin/bash <<EOF >LOG 2>&1
+arch-chroot /mnt /bin/bash <<EOF >/dev/tty
 pacman -Syu --noconfirm
 
 echo LOCALE and stuff
@@ -110,6 +110,8 @@ cat <<SU >> /etc/sudoers
 ray ALL=(ALL) NOPASSWD: ALL
 SU
 
+cp /home/xinitrc /home/ray/.xinitrc
+
 echo Chowning Ray
 chown -R ray:ray /home/ray
 sleep 2
@@ -122,7 +124,6 @@ sleep 3
 sudo pacman -Syu --noconfirm
 sleep 2
 
-cp /home/xinitrc /home/ray/.xinitrc
 echo Installing yay
 
 pacman -U yay-11.0.2-1-x86_64.pkg.tar.zst --noconfirm
@@ -214,5 +215,3 @@ cp mirrorlist /mnt/etc/pacman.d/
 cp rclone-mount* /mnt/etc/systemd/system
 mkdir /mnt/home/ray/git
 mv /mnt/dusk /mnt/home/ray/git
-
-
