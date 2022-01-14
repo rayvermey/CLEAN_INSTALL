@@ -85,6 +85,7 @@ cp sudoers /mnt/etc
 cp yay-11.0.2-1-x86_64.pkg.tar.zst /mnt
 cp rclone.conf /mnt
 
+cp xinitrc /mnt/home
 
 echo Going CHROOT
 arch-chroot /mnt /bin/bash <<EOF >LOG 2>&1
@@ -121,7 +122,7 @@ sleep 3
 sudo pacman -Syu --noconfirm
 sleep 2
 
-
+cp /home/xinitrc /home/ray/.xinitrc
 echo Installing yay
 
 pacman -U yay-11.0.2-1-x86_64.pkg.tar.zst --noconfirm
