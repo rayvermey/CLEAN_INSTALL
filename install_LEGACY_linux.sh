@@ -23,13 +23,15 @@ sleep 2
 sfdisk --delete /dev/$DISK
 sleep 2
 
+MEMTOTAL=$(grep MemTotal /proc/meminfo | awk ' { print $2 }')
+
 fdisk /dev/$DISK <<EOF
 o
 n
 p
 
 
-+2G
++${MEMTOTAL}k
 t
 82
 n
@@ -91,7 +93,7 @@ locale-gen
 export LANG=en_US.UTF-8
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 ln -s /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
-echo Arch-TEST > /etc/hostname
+echo Arch-VM > /etc/hostname
 sed -i "/localhost/s/$/ Arch-VM" /etc/hosts
 echo "root:qazwsx12" | chpasswd
 
@@ -196,17 +198,8 @@ cd dusk
 make
 sudo make install
 
-pacman -S gimp picom vivaldi sxhkd copyq transmission-gtk bash-completion dunst variety syncthing telegram-desktop caprine discord feh flameshot spice --noconfirm 
+#pacman -S gimp picom vivaldi sxhkd copyq transmission-gtk bash-completion dunst variety syncthing telegram-desktop caprine discord feh flameshot spice --noconfirm 
 #yay -S autokey whatsapp-nativefier kalu insync spacefm slack tweetdeck nomachine spotify-legacy ncspot --noconfirm
-
-##################################################################################################
-##################################################################################################
-##################################################################################################
-### Hieronder de scripts copieren en van Jotta met pacman -U file loop de packages nog installeren
-##################################################################################################
-##################################################################################################
-##################################################################################################
-
 
 EOF
 
