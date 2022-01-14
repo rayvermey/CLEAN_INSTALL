@@ -12,7 +12,6 @@ umount -R /dev/${DISK}3
 sleep 2
 umount -R /mnt
 sleep 2
-df
 
 echo Setting vi
 ln -s /usr/bin/vim /usr/bin/vi
@@ -97,7 +96,7 @@ locale-gen
 export LANG=en_US.UTF-8
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 ln -s /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
-echo Arch-TEST > /etc/hostname
+echo Arch-VM > /etc/hostname
 sed -i "/localhost/s/$/ Arch-VM" /etc/hosts
 echo "root:qazwsx12" | chpasswd
 
@@ -128,7 +127,6 @@ echo Installing yay
 pacman -U yay-11.0.2-1-x86_64.pkg.tar.zst --noconfirm
 
 echo Preparing Jotta and Rclone
-pacman -S rclone --noconfirm
 sleep 2
 
 mkdir -p /DATA/cloud/Jotta
@@ -197,10 +195,6 @@ grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
 
 grub-mkconfig -o /boot/grub/grub.cfg
 
-echo installing paru
-
-su ray -c 'yay -S paru-bin --noconfirm'
-
 echo Installing dusk
 
 su ray -c 'yay --noconfirm -S yajl'
@@ -210,10 +204,6 @@ git clone https://github.com/bakkeby/dusk
 cd dusk
 make
 sudo make install
-
-#pacman -S gimp picom vivaldi sxhkd copyq transmission-gtk bash-completion dunst variety syncthing telegram-desktop caprine discord feh flameshot spice --noconfirm 
-#su ray -c 'yay -S autokey whatsapp-nativefier kalu insync spacefm slack tweetdeck nomachine spotify-legacy ncspot --noconfirm'
-
 
 EOF
 
