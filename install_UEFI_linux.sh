@@ -85,7 +85,9 @@ cp sudoers /mnt/etc
 cp yay-11.0.2-1-x86_64.pkg.tar.zst /mnt
 cp rclone.conf /mnt
 
-cp /FILES/xinitrc /mnt/home
+cp .xinitrc /mnt/home
+cp sxhkdrc /mnt/home
+cp dusk_config.h /mnt/home
 
 echo Going CHROOT
 arch-chroot /mnt /bin/bash <<EOF >/dev/tty
@@ -148,16 +150,6 @@ mkdir -p /MEDIA/Jotta_Photos
 chown -R ray:ray /DATA/
 chown -R ray:ray /MEDIA/
 
-#echo Copying Jotta files
-
-#mkdir JOTTA
-#cd JOTTA
-#tar xvf /FILES/jotta-cli-0.8.36055_linux_x86.tar
-#cp -r usr/* /usr
-#cp -r etc/* /etc
-#cd ..
-
-
 sudo chown -R jottad /var/lib/jottad
 
 cp /FILES/jottad.service /etc/systemd/system/
@@ -204,6 +196,8 @@ su ray -c 'yay --noconfirm -S imlib2'
 
 git clone https://github.com/bakkeby/dusk
 cd dusk
+mv /home/dusk_config.h config.h
+chown ray:ray config.h
 make
 sudo make install
 
@@ -214,4 +208,8 @@ echo moving dusk
 cp mirrorlist /mnt/etc/pacman.d/
 cp rclone-mount* /mnt/etc/systemd/system
 mkdir /mnt/home/ray/git
+mkdir -p /mnt/home/ray/.config/sxhkd
 mv /mnt/dusk /mnt/home/ray/git
+mv /mnt/home/sxhkdrc /mnt/home/ray/.config/sxhkd
+mv /home/.xinitrc /home/ray
+
