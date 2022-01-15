@@ -1,0 +1,94 @@
+#!/bin/sh
+
+userresources=$HOME/.Xresources
+usermodmap=$HOME/.Xmodmap
+sysresources=/etc/X11/xinit/.Xresources
+sysmodmap=/etc/X11/xinit/.Xmodmap
+
+# merge in defaults and keymaps
+
+if [ -f $sysresources ]; then
+
+
+
+
+
+
+
+    xrdb -merge $sysresources
+
+fi
+
+if [ -f $sysmodmap ]; then
+    xmodmap $sysmodmap
+fi
+
+if [ -f "$userresources" ]; then
+
+#exec /usr/local/bin/dusk >/tmp/dusk.log 2>&1
+
+
+
+
+
+
+    xrdb -merge "$userresources"
+
+fi
+
+if [ -f "$usermodmap" ]; then
+    xmodmap "$usermodmap"
+fi
+
+# start some nice programs
+
+if [ -d /etc/X11/xinit/xinitrc.d ] ; then
+ for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+  [ -x "$f" ] && . "$f"
+ done
+ unset f
+fi
+
+export PATH=/home/ray/scripts:$PATH
+export DE=dusk
+
+xset +fp /usr/share/fonts/local/ &
+/home/ray/.screenlayout/raynu.sh &
+st -c "MyFancyClock" -g "=53x8" -e tty-clock -s &
+copyq  &
+sxhkd  &
+transmission-gtk  &
+spice-vdagentd &
+dunst  &
+variety  &
+kalu  &
+syncthing  &
+pcloud  &
+insync start &
+telegram-desktop  &
+caprine  &
+discord  &
+whatsapp-for-linux  &
+#whatsapp-nativefier  &
+element-desktop  &
+picom  &
+slack  &
+tweetdeck &
+# ticktick  &
+/home/ray/scripts/evernote.sh &
+nomachine  &
+flameshot  &
+autokey-gtk  &
+blueberry-tray  &
+/home/ray/scripts/startchrome.sh  &
+/home/ray/scripts/startviv.sh  &
+/home/ray/scripts/startmail.sh  &
+/home/ray/scripts/reddit.sh  &
+/home/ray/scripts/start_teams &
+/home/ray/scripts/mybar.sh &
+setxkbmap -layout us -variant intl &
+#wal -R &
+mpd  &
+#/home/ray/AppImages/Ferdi-5.6.4-nightly.29.AppImage &
+
+exec /usr/local/bin/dusk >/tmp/dusk.log 2>&1
