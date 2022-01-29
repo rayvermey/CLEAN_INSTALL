@@ -85,7 +85,7 @@ cp sudoers /mnt/etc
 cp yay-11.0.2-1-x86_64.pkg.tar.zst /mnt
 cp rclone.conf /mnt
 
-cp .xinitrc /mnt/home
+cp VM_xinitrc /mnt/home
 cp sxhkdrc /mnt/home
 cp dusk_config.h /mnt/home
 
@@ -112,7 +112,7 @@ cat <<SU >> /etc/sudoers
 ray ALL=(ALL) NOPASSWD: ALL
 SU
 
-cp /home/xinitrc /home/ray/.xinitrc
+cp /home/VM_xinitrc /home/ray/.xinitrc
 
 echo Chowning Ray
 chown -R ray:ray /home/ray
@@ -200,6 +200,12 @@ mv /home/dusk_config.h config.h
 chown ray:ray config.h
 make
 sudo make install
+
+echo Installing YAY packages
+for PACK in /FILES/AUR_PACKAGES
+do
+	pacman -U $PACK
+done
 
 EOF
 

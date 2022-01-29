@@ -53,24 +53,20 @@ export PATH=/home/ray/scripts:$PATH
 export DE=dusk
 
 xset +fp /usr/share/fonts/local/ &
-/home/ray/.screenlayout/raynu.sh &
-st -c "MyFancyClock" -g "=53x8" -e tty-clock -s &
+xrandr -s 1600x900 & 
+#st -c "MyFancyClock" -g "=53x8" -e tty-clock -s &
 copyq  &
 sxhkd  &
-transmission-gtk  &
 spice-vdagentd &
 dunst  &
 variety  &
-kalu  &
 syncthing  &
-pcloud  &
-insync start &
+#insync start &
 telegram-desktop  &
 caprine  &
 discord  &
 whatsapp-for-linux  &
 #whatsapp-nativefier  &
-element-desktop  &
 picom  &
 slack  &
 tweetdeck &
