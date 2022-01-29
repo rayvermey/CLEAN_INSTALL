@@ -204,7 +204,7 @@ sudo make install
 echo Installing YAY packages
 for PACK in /FILES/AUR_PACKAGES
 do
-	pacman -U $PACK
+	pacman -U $PACK --noconfirm --needed
 done
 
 EOF

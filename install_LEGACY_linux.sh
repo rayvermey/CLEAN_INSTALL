@@ -198,8 +198,12 @@ cd dusk
 make
 sudo make install
 
-#pacman -S gimp picom vivaldi sxhkd copyq transmission-gtk bash-completion dunst variety syncthing telegram-desktop caprine discord feh flameshot spice --noconfirm 
-#yay -S autokey whatsapp-nativefier kalu insync spacefm slack tweetdeck nomachine spotify-legacy ncspot --noconfirm
+echo Installing AUR Packages
+
+for PACK in /FILES/AUR_PACKAGES
+do
+	pacman -U $PACK --noconfirm --needed
+done
 
 EOF
 
