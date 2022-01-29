@@ -1,9 +1,9 @@
-#if [ $(lsblk|grep disk|grep vda|sed 's/ .*$//') == vda ]
-#then
-	#DISK=vda
-#else
+if [ $(lsblk|grep disk|grep vda|sed 's/ .*$//') == vda ]
+then
+	DISK=vda
+else
 	DISK=sda
-#fi
+fi
 
 echo Freeing System
 umount -R /dev/${DISK}1
@@ -209,9 +209,9 @@ sudo make install
 
 echo Installing AUR packages
 
-for PACK in /FILES/AUR_PACKAGES
+for PACK in /FILES/AUR_PACKAGES/*.zst
 do
-	pacman -U $PACK --noconfirm --neeeded
+	pacman -U $PACK --noconfirm --needed
 done
 
 EOF
