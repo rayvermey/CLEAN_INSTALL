@@ -221,11 +221,18 @@ cp rclone-mount* /mnt/etc/systemd/system
 mkdir /mnt/home/ray/git
 mv /mnt/dusk /mnt/home/ray/git
 
-cp get_wallpaper ~/.config/variety/scripts
-cp set_wallpaper ~/.config/variety/scripts
 
 echo Copying scripts
 
 cp -rv FILES/scripts /mnt/home/ray
 chmod -R 755 /mnt/home/ray/scripts
+
+mkdir -p /mnt/home/ray/.config/{picom,variety,variety/scripts}
+
+cp get_wallpaper /mnt/home/ray/.config/variety/scripts
+cp set_wallpaper /mnt/home/ray/.config/variety/scripts
+
+cp configs_general/picom.conf /mnt/home/ray/.config/picom
+cp configs_general/.aliases.all /mnt/home/ray
+cp configs_general/.zshrc /mnt/home/ray
 
