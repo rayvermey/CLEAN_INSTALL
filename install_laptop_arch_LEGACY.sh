@@ -224,3 +224,8 @@ mv /mnt/dusk /mnt/home/ray/git
 cp get_wallpaper ~/.config/variety/scripts
 cp set_wallpaper ~/.config/variety/scripts
 
+echo Copying scripts
+
+cp -rv FILES/scripts /mnt/home/ray
+
+

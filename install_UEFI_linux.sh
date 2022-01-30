@@ -223,3 +223,9 @@ mv /mnt/dusk /mnt/home/ray/git
 mv /mnt/home/sxhkdrc /mnt/home/ray/.config/sxhkd
 mv /home/.xinitrc /home/ray
 
+cp get_wallpaper ~/.config/variety/scripts
+cp set_wallpaper ~/.config/variety/scripts
+
+echo Copying scripts
+
+cp -rv FILES/scripts /mnt/home/ray
