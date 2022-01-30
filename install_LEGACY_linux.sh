@@ -79,6 +79,8 @@ genfstab -U /mnt >> /mnt/etc/fstab
 cp b43-firmware-6.30.163.46-1-any.pkg.tar.zst /mnt/root 
 cp sudoers /mnt/etc
 
+cp POST_INSTALL.sh /mnt
+
 echo Going CHROOT
 pacman -Syu --noconfirm
 
@@ -200,10 +202,7 @@ sudo make install
 
 echo Installing AUR Packages
 
-for PACK in /FILES/AUR_PACKAGES
-do
-	pacman -U $PACK --noconfirm --needed
-done
+/POST_INSTALL.sh
 
 EOF
 

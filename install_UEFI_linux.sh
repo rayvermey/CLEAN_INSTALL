@@ -89,6 +89,8 @@ cp VM_xinitrc /mnt/home
 cp sxhkdrc /mnt/home
 cp dusk_config.h /mnt/home
 
+cp POST_INSTALL.sh /mnt
+
 echo Going CHROOT
 arch-chroot /mnt /bin/bash <<EOF >/dev/tty
 pacman -Syu --noconfirm
@@ -206,6 +208,8 @@ for PACK in /FILES/AUR_PACKAGES
 do
 	pacman -U $PACK --noconfirm --needed
 done
+
+/POST_INSTALL.sh
 
 EOF
 
