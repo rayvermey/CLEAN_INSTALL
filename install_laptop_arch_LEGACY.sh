@@ -221,4 +221,6 @@ cp rclone-mount* /mnt/etc/systemd/system
 mkdir /mnt/home/ray/git
 mv /mnt/dusk /mnt/home/ray/git
 
+cp get_wallpaper ~/.config/variety/scripts
+cp set_wallpaper ~/.config/variety/scripts
 
