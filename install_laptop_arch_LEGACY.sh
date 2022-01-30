@@ -227,5 +227,5 @@ cp set_wallpaper ~/.config/variety/scripts
 echo Copying scripts
 
 cp -rv FILES/scripts /mnt/home/ray
-
+chmod -R 755 /mnt/home/ray/scripts
 
