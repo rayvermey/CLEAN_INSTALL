@@ -1,0 +1,2 @@
+#rsync -r -t -p -o -v --progress --delete -u -i -s /home/* /data/NAS/BACKUP/HOME 
+ sudo rsync -r -t -v --progress -I -H -s /home/ /run/media/ray/Elements\ SE/DESKTOP-RAY/HOME/

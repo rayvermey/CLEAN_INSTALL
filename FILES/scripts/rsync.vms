@@ -1,0 +1,1 @@
+rsync -arv -t --progress --delete --ignore-existing /media/D/Virtual_Machines/ /backup/Backup/Virtual_Machines/ | mail -s"Rsync VMs" ray@moonyar.nl

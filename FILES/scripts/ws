@@ -1,0 +1,132 @@
+for WORKSPACES in $(i3-msg -t get_workspaces | jq -r .\[].name | sed 's/:.*$//' | sort -n)
+do
+	if [ $WORKSPACES == 1 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+
+	if [ $WORKSPACES == 2 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+	if [ $WORKSPACES == 3 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+	if [ $WORKSPACES == 4 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+	if [ $WORKSPACES == 5 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+	if [ $WORKSPACES == 6 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+	if [ $WORKSPACES == 7 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+	if [ $WORKSPACES == 8 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+	if [ $WORKSPACES == 9 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+	if [ $WORKSPACES == 10 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+	if [ $WORKSPACES == 11 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+
+	if [ $WORKSPACES == 12 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+	if [ $WORKSPACES == 13 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+
+	if [ $WORKSPACES == 14 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+
+	if [ $WORKSPACES == 15 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+
+	if [ $WORKSPACES == 16 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+
+	if [ $WORKSPACES == 17 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+
+	if [ $WORKSPACES == 18 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+
+	if [ $WORKSPACES == 19 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+
+	if [ $WORKSPACES == 20 ]
+	then
+	echo $WORKSPACES bezet
+else
+	echo $WORKSPACES free
+	fi
+done

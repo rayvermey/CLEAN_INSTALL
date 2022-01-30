@@ -1,0 +1,1 @@
+rsync -h --progress --stats -r -tgo -p -l -D --update /data/Photos/ /data/NAS/BACKUP/PHOTOS 

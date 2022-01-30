@@ -1,0 +1,13 @@
+wmctrl -r Tusk -t 12
+wmctrl -r TelegramDesktop -t 9
+wmctrl -r discord -t 9
+wmctrl -r ICE-SSB -t 10
+wmctrl -r Slack -t 10
+wmctrl -r Caprine -t 10
+wmctrl -r ICE-SSB-reddit -t 11
+wmctrl -r ICE-SSB-quora -t 11
+wmctrl -r Todoist -t 13
+wmctrl -r Trello -t 13
+wmctrl -r ICE-SSB-facebook -t 14
+wmctrl -r Spotify -t 8
+wmctrl -r Vivaldi-snapshot -t 5

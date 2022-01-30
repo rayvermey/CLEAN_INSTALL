@@ -1,0 +1,7 @@
+#!/bin/bash
+
+WEER=$(wttr nieuw-vennep) 
+SOORT_WEER=$(echo $WEER| head -4|tail -2|tail -1 | awk '{print $8}')
+TEMP=$(echo $WEER| head -4|tail -1 | awk '{print $11,$12,$13}')
+echo $SOORT_WEER $TEMP
+

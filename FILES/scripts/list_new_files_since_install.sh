@@ -1,0 +1,2 @@
+sudo find / -mount -newer ~/INSTALL_DATE -print > /tmp/ROOT_FILES_SINCE_INSTALL
+rsync -avz --include-from=/tmp/ROOT_FILES_SINCE_INSTALL /DATA/REMOVABLE/BKUP_7TB_SEAGATE/DESKTOP-RAY/ROOTFS_FILES/ 

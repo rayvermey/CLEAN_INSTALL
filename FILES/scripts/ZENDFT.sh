@@ -1,0 +1,1 @@
+curl https://www.fasttech.com/category/1/new-products | sed 's/\/\//http:\/\//' | sed 's/href=\"\/products\//href=\"http:\/\/www.fasttech.com\/products\//' | mail --append="Content-type: text/html" -s "Nieuwe zooi van Fasttech" rayvermey@gmail.com, r.sauer4@upcmail.nl 

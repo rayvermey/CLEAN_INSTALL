@@ -1,0 +1,10 @@
+for source in *.JPG 
+do
+	target=`echo $source | sed 's=mrt=/03/=g'`
+	maand=03
+	dag=`echo $source | cut -c1-2`
+	mkdir -p $maand/$dag
+	mv "$source" $maand/$dag
+
+done
+

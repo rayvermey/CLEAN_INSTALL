@@ -1,0 +1,5 @@
+cd /data/media/Muziek
+echo Starting find
+find . -print >RSYNC.LIST
+echo Find klaar, starting rsync
+rsync -R --delete --progress --iconv=ISO-8859-1,utf-8 --files-from=RSYNC.LIST . /data/NAS/BACKUP/MUZIEK

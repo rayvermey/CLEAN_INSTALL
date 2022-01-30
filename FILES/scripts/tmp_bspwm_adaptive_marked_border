@@ -1,0 +1,12 @@
+#!/bin/bash
+
+while read -r line; do
+	case "$line" in
+		*'marked on')
+			bspc config -n "$(bspc query -N -n .marked)" border_width 10
+			;;
+		*'marked off')
+			bspc config border_width 1
+			;;
+	esac
+done < <(bspc subscribe report node_flag)

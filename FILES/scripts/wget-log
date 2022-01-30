@@ -1,0 +1,7 @@
+--2019-04-25 19:52:58--  https://linuxtracker.org/download/index.php?page=downloadcheck
+Loaded CA certificate '/etc/ssl/certs/ca-certificates.crt'
+Resolving linuxtracker.org (linuxtracker.org)... 178.63.18.77, fe80::4261:86ff:febe:8586
+Connecting to linuxtracker.org (linuxtracker.org)|178.63.18.77|:443... connected.
+HTTP request sent, awaiting response... 404 Not Found
+2019-04-25 19:53:02 ERROR 404: Not Found.
+

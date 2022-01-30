@@ -1,0 +1,10 @@
+for source in *.JPG 
+do
+
+	maand=11
+	dag=`echo $source | cut -c5-6`
+	mkdir -p $maand/$dag
+	mv $source $maand/$dag
+
+done
+
