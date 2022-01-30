@@ -82,6 +82,7 @@ cp sudoers /mnt/etc
 cp yay-11.0.2-1-x86_64.pkg.tar.zst /mnt
 cp rclone.conf /mnt
 
+cp POST_INSTALL.sh /mnt
 
 echo Going CHROOT
 arch-chroot /mnt /bin/bash <<EOF >LOG 2>&1
@@ -209,10 +210,7 @@ sudo make install
 
 echo Installing AUR packages
 
-for PACK in /FILES/AUR_PACKAGES/*.zst
-do
-	pacman -U $PACK --noconfirm --needed
-done
+/POST_INSTALL.sh
 
 EOF
 
