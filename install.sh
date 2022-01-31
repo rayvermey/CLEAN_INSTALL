@@ -280,7 +280,7 @@ echo Copying scripts
 cp -rv FILES/scripts /mnt/home/ray
 chmod -R 755 /mnt/home/ray/scripts
 
-mkdir -p /mnt/home/ray/.config/{picom,variety,variety/scripts}
+mkdir -p /mnt/home/ray/.config/{picom,variety,variety/scripts,sxhkd}
 
 cp get_wallpaper /mnt/home/ray/.config/variety/scripts
 cp set_wallpaper /mnt/home/ray/.config/variety/scripts
@@ -288,4 +288,8 @@ cp set_wallpaper /mnt/home/ray/.config/variety/scripts
 cp configs_general/picom.conf /mnt/home/ray/.config/picom
 cp configs_general/.aliases.all /mnt/home/ray
 cp configs_general/.zshrc /mnt/home/ray
+cp configs_general/sxhkdrc /mnt/home/ray/.config/sxhkd
+cp VM_xinitrc /mnt/home/ray/.xinitrc
+
+chown -R ray:ray /mnt/home/ray
 
