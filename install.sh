@@ -76,6 +76,7 @@ mount /dev/${DISK}3 /mnt
 mkdir /mnt/home
 mount /dev/${DISK}4 /mnt/home
 mkdir /mnt/efi
+mount /dev/${DISK}1 /mnt/efi
 
 else
 
